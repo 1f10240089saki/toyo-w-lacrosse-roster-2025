@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <link rel="stylesheet" href="style.css">
-  <a href="#" id="page-top"><i class="blogicon-chevron-up"></i></a>
 </head>
 <body>
   <header class="site-header">
@@ -22,6 +21,37 @@
     <button data-filter="year-2">Grade 2</button>
     <button data-filter="year-1">Grade 1</button>
   </nav>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // すべての.containerに対してイベントを設定
+    document.querySelectorAll('.container').forEach(function (container) {
+      container.addEventListener('click', function (e) {
+        // すでに表示中なら非表示に
+        if (container.classList.contains('active')) {
+          container.classList.remove('active');
+        } else {
+          // 他のオーバーレイを閉じる
+          document.querySelectorAll('.container.active').forEach(function (other) {
+            other.classList.remove('active');
+          });
+          // 現在のオーバーレイを表示
+          container.classList.add('active');
+        }
+        e.stopPropagation(); // 他のイベントとバッティングしないように
+      });
+    });
+
+    // ドキュメント全体をクリックしたらすべて閉じる
+    document.addEventListener('click', function () {
+      document.querySelectorAll('.container.active').forEach(function (container) {
+        container.classList.remove('active');
+      });
+    });
+  });
+</script>
 
 
   <main>
