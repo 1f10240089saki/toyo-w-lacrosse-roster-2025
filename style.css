@@ -13,8 +13,8 @@ body {
 }
 
 .site-hedder-img{
-  width: 400px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -52,21 +52,42 @@ body {
 .photo-wrap {
 position:relative; width:100%; padding-bottom:100%;
 overflow:hidden;
-}
-.photo-wrap img {
-  position:absolute; top:0; left:0;
-  width:100%; height:100%; object-fit:cover;
+background-color:#f2f8ff;
 }
 
+.photo-wrap img { 
+  position: absolute; 
+  top: 0; left: 0; 
+  width: 100%; height: 100%; 
+  object-fit: contain; 
+}
+
+.player-photo { 
+  position: absolute; 
+  /* 上端から20%下にずらす */ 
+  top: 20px; 
+  /* 横方向中央寄せ */ 
+  left: 50%; 
+  /* コンテナいっぱいに描画 */ 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  /* まず左に50%移動して中央寄せし、  */ 
+  /* その後 0.7 倍に縮小 */ 
+  transform: translateX(-50%) scale(0.7); 
+  /* 縮小の基点は中央上 */ 
+  transform-origin: center top; 
+  transition: transform .3s; 
+} 
 
 /* 番号 */
 .photo-wrap .number {
   font-family: "Crimson Text", serif;
   font-weight: 700;
   font-style: italic;
-  position:absolute; top:8px; left:12px;
+  position:absolute; top:0px; left:6px;
   color:#003366; font-weight:bold;
-  padding:2px 6px; font-size:60px; border-radius:4px;
+  padding:0px 0px; font-size:55px; border-radius:4px;
 }
 
 /* オーバーレイ */
@@ -102,7 +123,7 @@ overflow:hidden;
 /* テキスト情報 */
 .info {
   padding:15px;
-  padding-top: 20px;
+  padding-top: 10px;
   border-top: 4px solid #003366;
 }
 .info .name {
@@ -122,4 +143,33 @@ overflow:hidden;
 /* タブレット以上で３列 */
 @media(min-width:600px) {
   .roster { grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); }
+}
+
+/* トップへ戻るボタン */
+.page_top_btn {
+position: fixed;
+bottom: 10px;
+right: 10px;
+font-weight: bold;
+padding: 0.7em;
+text-align: center;
+background: #003366;
+color: #fff;
+transition: 0.3s0;
+}
+
+/* マウスオーバー時 */
+.page_top_btn:hover {
+background: #003366;
+color: rgb(255, 255, 255, 0.8);
+}
+
+.content.white {
+height: 500px;
+background-color: #fff;
+}
+
+.content.gray {
+height: 500px;
+background-color: #eee;
 }
