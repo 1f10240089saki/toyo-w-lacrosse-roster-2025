@@ -145,31 +145,18 @@ background-color:#f2f8ff;
   .roster { grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); }
 }
 
-/* トップへ戻るボタン */
-.page_top_btn {
-position: fixed;
-bottom: 10px;
-right: 10px;
-font-weight: bold;
-padding: 0.7em;
-text-align: center;
-background: #003366;
-color: #fff;
-transition: 0.3s0;
+/***追従するトップへ戻るボタン***/
+#page-top {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    background: #fff;
+    color: #737373;
+    padding: 10px;
+    border: solid 1px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px -6px rgba(0,0,0,.5), 0 3px 10px -4px rgba(0,0,0,.2);
 }
-
-/* マウスオーバー時 */
-.page_top_btn:hover {
-background: #003366;
-color: rgb(255, 255, 255, 0.8);
-}
-
-.content.white {
-height: 500px;
-background-color: #fff;
-}
-
-.content.gray {
-height: 500px;
-background-color: #eee;
-}
+/***トップへ戻るボタンここまで***/
