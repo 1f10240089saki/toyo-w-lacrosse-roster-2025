@@ -13,45 +13,92 @@
     <img class="site-hedder-img" src="hedder_IMG.jpg" alt="全員画像">
     <h1>2025 東洋女子ラクロス部 Roster</h1>
   </header>
-  <nav class="filter-nav">
+  <nav href="#" class="filter-nav">
     <button data-filter="all" class="active">ALL</button>
-    <button data-filter="bench">Bench</button></br>
-    <button data-filter="year-4">Grade 4</button>
-    <button data-filter="year-3">Grade 3</button>
-    <button data-filter="year-2">Grade 2</button>
-    <button data-filter="year-1">Grade 1</button>
+    <button data-filter="bench">ベンチメンバー</button></br>
+    <button data-filter="year-4">4年</button>
+    <button data-filter="year-3">3年</button>
+    <button data-filter="year-2">2年</button>
+    <button data-filter="year-1">1年</button>
   </nav>
 
+  <!-- java -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function(){
 
+        // ---- フィルタ＆ソート機能 ----
+        const buttons = document.querySelectorAll(".filter-nav button");
+        const cards   = document.querySelectorAll(".player-card");
+        const roster  = document.querySelector(".roster");
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // すべての.containerに対してイベントを設定
-    document.querySelectorAll('.container').forEach(function (container) {
-      container.addEventListener('click', function (e) {
-        // すでに表示中なら非表示に
-        if (container.classList.contains('active')) {
-          container.classList.remove('active');
-        } else {
-          // 他のオーバーレイを閉じる
-          document.querySelectorAll('.container.active').forEach(function (other) {
-            other.classList.remove('active');
-          });
-          // 現在のオーバーレイを表示
-          container.classList.add('active');
+        // 番号順に並び替え（key="all" または "bench" を受け取る）
+        function sortByNumber(key = "all") {
+        // ソート対象を決める
+        const selector = key === "all"
+            ? ".player-card"
+            : `.player-card.${key}`;
+        const list = Array.from(roster.querySelectorAll(selector));
+        // data-number 属性を昇順にソート
+        list.sort((a, b) => {
+            return parseInt(a.dataset.number, 10)
+                - parseInt(b.dataset.number, 10);
+        });
+        // DOM 上の並び替え
+        list.forEach(el => roster.appendChild(el));
         }
-        e.stopPropagation(); // 他のイベントとバッティングしないように
+
+        // ボタンにクリックイベントをバインド
+        buttons.forEach(btn => {
+        btn.addEventListener("click", function(){
+            // ① ボタンの active 切り替え
+            buttons.forEach(b => b.classList.remove("active"));
+            this.classList.add("active");
+
+            const key = this.dataset.filter;
+
+            // ② カードの表示／非表示
+            cards.forEach(card => {
+            if (key === "all" || card.classList.contains(key)) {
+                card.classList.remove("hidden");
+            } else {
+                card.classList.add("hidden");
+            }
+            });
+
+            // ③ ソート処理（全員 or ベンチのみ）
+            if (key === "all" || key === "bench") {
+            sortByNumber(key);
+            }
+
+            // ④ bench（ベンチ）表示中だけ .bench-active を付与
+            roster.classList.toggle("bench-active", key === "bench");
       });
     });
 
-    // ドキュメント全体をクリックしたらすべて閉じる
-    document.addEventListener('click', function () {
-      document.querySelectorAll('.container.active').forEach(function (container) {
-        container.classList.remove('active');
+
+    // ---- オーバーレイ開閉機能 ----
+    // .container 要素をクリックすると overlay をトグル
+    document.querySelectorAll(".container").forEach(container => {
+      container.addEventListener("click", function(e){
+        if (this.classList.contains("active")) {
+          this.classList.remove("active");
+        } else {
+          // 他が開いていたら閉じる
+          document.querySelectorAll(".container.active")
+            .forEach(opened => opened.classList.remove("active"));
+          this.classList.add("active");
+        }
+        e.stopPropagation(); // クリックイベントのバブリングを止める
       });
     });
+    // 画面どこかをクリックしたらすべてのオーバーレイを閉じる
+    document.addEventListener("click", function(){
+      document.querySelectorAll(".container.active")
+        .forEach(opened => opened.classList.remove("active"));
+    });
+
   });
-</script>
+  </script>
 
 
   <main>
@@ -218,7 +265,7 @@
             </div>
         </div>
         
-        <div class="player-card year-4" data-number="10">
+        <div class="player-card bench bench-staff year-4" data-number="10">
             <div class="photo-wrap">
             <img src="img4/WAKA.PNG" alt="10 わか">
                 <div class="overlay">
@@ -230,6 +277,7 @@
                     </dl>
                 </div>
                 <span class="number">10</span>
+                <span class="staff-label">ベンチスタッフ</span>
             </div>
             <div class="info">
                 <p class="name">わか</p>
@@ -406,7 +454,7 @@
                         <dt>学部学科</dt><dd>情報連携学部<br>情報連携学科</dd>
                         <dt>身長</dt><dd>167cm</dd>
                         <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>バスケットボール、空手、陸上、テニス</dd>
+                        <dt>出身スポーツ</dt><dd>空手、陸上、テニス</dd>
                     </dl>
                 </div>
                 <span class="number">20</span>
@@ -446,7 +494,7 @@
                         <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
                         <dt>身長</dt><dd>164cm</dd>
                         <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>新体操、水泳、バスケットボール、ハンドボール</dd>
+                        <dt>出身スポーツ</dt><dd>新体操、水泳、バスケ</dd>
                     </dl>
                 </div>
                 <span class="number">23</span>
@@ -526,7 +574,7 @@
                         <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
                         <dt>身長</dt><dd>157cm</dd>
                         <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>チアダンス、バスケットボール</dd>
+                        <dt>出身スポーツ</dt><dd>チアダンス、バスケ</dd>
                     </dl>
                 </div>
                 <span class="number">27</span>
@@ -586,7 +634,7 @@
                         <dt>学部学科</dt><dd>国際学部<br>国際地域学科</dd>
                         <dt>身長</dt><dd>160cm</dd>
                         <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>バレーボール、バスケットボール、テニス</dd>
+                        <dt>出身スポーツ</dt><dd>バレ、バスケ、テニス</dd>
                     </dl>
                 </div>
                 <span class="number">30</span>
@@ -640,7 +688,7 @@
 
         <div class="player-card bench year-2" data-number="33">
             <div class="photo-wrap">
-            <img src="img2/RITA.PNG"33 りた">
+            <img src="img2/RITA.PNG" alt="33 りた">
                 <div class="overlay">
                     <dl>
                         <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
@@ -678,7 +726,7 @@
             </div>
         </div>
 
-        <div class="player-card year-2" data-number="35">
+        <div class="player-card bench bench-staff year-2" data-number="35">
             <div class="photo-wrap">
             <img src="img2/NASA.PNG" alt="35 なさ">
                 <div class="overlay">
@@ -690,6 +738,7 @@
                     </dl>
                 </div>
                 <span class="number">35</span>
+                <span class="staff-label">ベンチスタッフ</span>
             </div>
             <div class="info">
                 <p class="name">なさ</p>
@@ -860,7 +909,7 @@
             </div>
         </div>
 
-        <div class="player-card year-2" data-number="44">
+        <div class="player-card bench bench-staff year-2" data-number="44">
             <div class="photo-wrap">
             <img src="img2/CHAMU.PNG" alt="44 ちゃむ">
                 <div class="overlay">
@@ -872,6 +921,7 @@
                     </dl>
                 </div>
                 <span class="number">44</span>
+                <span class="staff-label">ベンチスタッフ</span>
             </div>
             <div class="info">
                 <p class="name">ちゃむ</p>
@@ -1039,7 +1089,7 @@
             </div>
         </div>
         
-        <div class="player-card bench year-4" data-number="MG">
+        <div class="player-card bench bench-staff year-4" data-number="MG">
             <div class="photo-wrap">
             <img src="img4/NAO.PNG" alt="MG なお">
                 <div class="overlay">
@@ -1049,6 +1099,7 @@
                     </dl>
                 </div>
                 <span class="numberS">MG</span>
+                <span class="staff-label">ベンチスタッフ</span>
             </div>
             <div class="info">
                 <p class="name">なお</p>
@@ -1057,7 +1108,7 @@
             </div>
         </div>
 
-        <div class="player-card bench year-2" data-number="MG">
+        <div class="player-card bench bench-staff year-2" data-number="MG">
             <div class="photo-wrap">
             <img src="img2/NIMO2.PNG" alt="MG にも">
                 <div class="overlay">
@@ -1067,6 +1118,7 @@
                     </dl>
                 </div>
                 <span class="numberS">MG</span>
+                <span class="staff-label">ベンチスタッフ</span>
             </div>
             <div class="info">
                 <p class="name">にも</p>
@@ -1093,7 +1145,7 @@
             </div>
         </div>
 
-        <div class="player-card bench year-4" data-number="TR">
+        <div class="player-card bench bench-staff year-4" data-number="TR">
             <div class="photo-wrap">
             <img src="img4/SUZU.PNG" alt="TR すず">
                 <div class="overlay">
@@ -1108,10 +1160,11 @@
                 <p class="name">すず</p>
                 <p class="year">4年</p>
                 <p class="position">トレーナー</p>
+                <span class="staff-label">ベンチスタッフ</span>
             </div>
         </div> 
 
-        <div class="player-card bench year-2" data-number="TR">
+        <div class="player-card bench bench-staff year-2" data-number="TR">
             <div class="photo-wrap">
             <img src="img2/HYUU.PNG" alt="TR ひゅう">
                 <div class="overlay">
@@ -1126,6 +1179,7 @@
                 <p class="name">ひゅう</p>
                 <p class="year">2年</p>
                 <p class="position">トレーナー</p>
+                <span class="staff-label">ベンチスタッフ</span>
             </div>
         </div>
 
@@ -1140,6 +1194,7 @@
                     </dl>
                 </div>
                 <span class="numberS">TR</span>
+                <span class="staff-label">ベンチスタッフ</span>
             </div>
             <div class="info">
                 <p class="name">さら</p>
@@ -1149,7 +1204,7 @@
         </div> 
 
 
-        <div class="player-card bench year-1" data-number="AS">
+        <div class="player-card bench bench-staff year-1" data-number="AS">
             <div class="photo-wrap">
             <img src="img1/IMG_SII.PNG" alt="AS しい">
                 <div class="overlay">
@@ -1159,6 +1214,7 @@
                     </dl>
                 </div>
                 <span class="numberS">AS</span>
+                <span class="staff-label">ベンチスタッフ</span>
             </div>
             <div class="info">
                 <p class="name">しい</p>
