@@ -22,6 +22,16 @@
     <button data-filter="year-1">1年</button>
   </nav>
 
+  <!-- モーダル本体 -->
+    <div id="noticeModal" class="modal hidden">
+    <div class="modal-content">
+        <h2>ご注意</h2>
+        <p>このページは保護者・OG向けの非公開リンクです。無断転用・再配布はお控えください。</p>
+        <button id="closeModal">閉じる</button>
+    </div>
+    </div>
+
+
   <!-- java -->
     <script>
     document.addEventListener("DOMContentLoaded", function(){
@@ -96,6 +106,20 @@
       document.querySelectorAll(".container.active")
         .forEach(opened => opened.classList.remove("active"));
     });
+
+    // ページができたらモーダルを表示
+    document.addEventListener("DOMContentLoaded", function(){
+        const modal = document.getElementById("noticeModal");
+        const btn   = document.getElementById("closeModal");
+        // hidden クラスをはずして表示
+        modal.classList.remove("hidden");
+
+        // 閉じるボタンで非表示に
+        btn.addEventListener("click", function(){
+            modal.classList.add("hidden");
+        });
+    });
+
 
   });
   </script>
@@ -448,7 +472,7 @@
 
         <div class="player-card bench year-2" data-number="20">
             <div class="photo-wrap">
-            <img src="img2/SHUN3.PNG" alt="20 しゅん">
+            <img src="img2/SHUN2.PNG" alt="20 しゅん">
                 <div class="overlay">
                     <dl>
                         <dt>学部学科</dt><dd>情報連携学部<br>情報連携学科</dd>
