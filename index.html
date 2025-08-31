@@ -1326,20 +1326,11 @@
     cards.forEach(card => roster.appendChild(card));
     }
 
-    // スクロール位置に応じてボタンの .show を切り替え
-    window.addEventListener('scroll', function() {
-        const btn = document.getElementById('to-top');
-        if (window.pageYOffset > 200) {
-        btn.classList.add('show');
-        } else {
-        btn.classList.remove('show');
-        }
-    });
-
-    // クリックでページトップへ
-    document.getElementById('to-top').addEventListener('click', function() {
+    // クリックでスムーズにページトップへ戻る
+    document.getElementById('to-top').addEventListener('click', function(){
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
   </script>
 </body>
 </html>
