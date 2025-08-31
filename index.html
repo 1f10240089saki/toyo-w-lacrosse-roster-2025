@@ -33,7 +33,6 @@
     </div>
     </div>
 
-    <a href="#page_top" class="page_top_btn">トップへ戻る</a>
 
   <!-- java -->
     <script>
@@ -1281,7 +1280,8 @@
   </footer>
 
 
-
+  <!-- ページトップへ戻るボタン -->
+  <button id="to-top">トップへ</button>
 
 
   <script>
@@ -1325,6 +1325,21 @@
     // 並び替えたカードを一度に append
     cards.forEach(card => roster.appendChild(card));
     }
+
+    // スクロール位置に応じてボタンの .show を切り替え
+    window.addEventListener('scroll', function() {
+        const btn = document.getElementById('to-top');
+        if (window.pageYOffset > 200) {
+        btn.classList.add('show');
+        } else {
+        btn.classList.remove('show');
+        }
+    });
+
+    // クリックでページトップへ
+    document.getElementById('to-top').addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   </script>
 </body>
 </html>

@@ -244,33 +244,33 @@ background-color:#f2f8ff;
   cursor: pointer;
 }
 
+/* ページ全体をスムーズスクロールに */
+html {
+  scroll-behavior: smooth;
+}
+
 /* トップへ戻るボタン */
-.page_top_btn {
-position: fixed;
-bottom: 10px;
-right: 10px;
-font-weight: bold;
-padding: 0.7em;
-text-align: center;
-background: #003366;
-color: #fff;
-transition: 0.3s0;
-z-index: 5;
+#to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #003366;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 1000;
+
+  /* 初期は非表示 */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
 }
 
-/* マウスオーバー時 */
-.page_top_btn:hover {
-background: #003366;
-color: rgb(255, 255, 255, 0.8);
-z-index: 5;
-}
-
-.content.white {
-height: 500px;
-background-color: #fff;
-}
-
-.content.gray {
-height: 500px;
-background-color: #eee;
+/* スクロール位置が一定以上で表示 */
+#to-top.show {
+  opacity: 1;
+  visibility: visible;
 }
