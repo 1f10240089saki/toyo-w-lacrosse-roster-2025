@@ -243,3 +243,32 @@ background-color:#f2f8ff;
   border-radius: 4px;
   cursor: pointer;
 }
+
+/* トップへ戻るボタン */
+.page_top_btn {
+position: fixed;
+bottom: 10px;
+right: 10px;
+font-weight: bold;
+padding: 0.7em;
+text-align: center;
+background: rgb(255, 0, 0);
+color: #fff;
+transition: 0.3s0;
+}
+
+/* マウスオーバー時 */
+.page_top_btn:hover {
+background: rgb(255, 0, 0, 0.8);
+color: rgb(255, 255, 255, 0.8);
+}
+
+.content.white {
+height: 500px;
+background-color: #fff;
+}
+
+.content.gray {
+height: 500px;
+background-color: #eee;
+}
