@@ -252,7 +252,7 @@ right: 10px;
 font-weight: bold;
 padding: 0.7em;
 text-align: center;
-background: #c1e4e9;
+background: #003366;
 color: #fff;
 transition: 0.3s0;
 z-index: 5;
@@ -260,7 +260,7 @@ z-index: 5;
 
 /* マウスオーバー時 */
 .page_top_btn:hover {
-background: #c1e4e9;
+background: #003366;
 color: rgb(255, 255, 255, 0.8);
 z-index: 5;
 }
