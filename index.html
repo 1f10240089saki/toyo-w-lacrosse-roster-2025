@@ -14,7 +14,13 @@
     <h1>2025 東洋女子ラクロス部 Roster</h1>
     <h4>【ご注意】</h2>
     <p>このページは保護者・OG向けの非公開リンクです。無断転用・再配布はお控えください。</p>
+    <div class="main-nav">
+        <button id="btn-roster" class="active">Roster</button>
+        <button id="btn-gallery">フォトギャラリー</button>
+    </div>
   </header>
+
+  
   <nav href="#" class="filter-nav">
     <button data-filter="all" class="active">ALL</button>
     <button data-filter="bench">ベンチメンバー</button></br>
@@ -124,11 +130,42 @@
 
 
   });
+
+// Roster Photoギャラリー
+    document.addEventListener("DOMContentLoaded", function(){
+    const btnRoster  = document.getElementById("btn-roster");
+    const btnGallery = document.getElementById("btn-gallery");
+    const rosterSec  = document.getElementById("roster-section");
+    const gallerySec = document.getElementById("gallery-section");
+    const filterNav  = document.querySelector(".filter-nav"); // もし非表示にしたければ
+
+    // Roster タブを押したとき
+    btnRoster.addEventListener("click", function(){
+        // ボタンの active 切り替え
+        btnRoster.classList.add("active");
+        btnGallery.classList.remove("active");
+        // セクション表示切替
+        rosterSec.style.display  = "grid";    // or "" （元のCSSに任せる）
+        gallerySec.style.display = "none";
+        // フィルタナビを表示したいなら
+        if(filterNav) filterNav.style.display = "";
+    });
+
+    // フォトギャラリー タブを押したとき
+    btnGallery.addEventListener("click", function(){
+        btnRoster.classList.remove("active");
+        btnGallery.classList.add("active");
+        rosterSec.style.display  = "none";
+        gallerySec.style.display = "grid";
+        // ロスター用フィルタが不要なら非表示に
+        if(filterNav) filterNav.style.display = "none";
+    });
+    });
   </script>
 
 
   <main>
-    <section class="roster">
+    <section id="roster-section" class="roster">
       <!-- ↓ ここからカードを必要数だけ繰り返し ↓ -->
         <div class="player-card bench year-3" data-number="0">
             <div class="photo-wrap">
@@ -1153,7 +1190,7 @@
             </div>
         </div> 
 
-        <div class="player-card year-1" data-number="MG">
+        <div class="player-card bench bench-staff year-1" data-number="MG">
             <div class="photo-wrap">
             <img src="img1/TOKI2.PNG" alt="MG とき">
                 <div class="overlay">
@@ -1163,6 +1200,7 @@
                     </dl>
                 </div>
                 <span class="numberS">MG</span>
+                <span class="staff-label">ベンチスタッフ</span>
             </div>
             <div class="info">
                 <p class="name">とき</p>
@@ -1251,6 +1289,17 @@
 
 
       <!-- …他の部員も同様に class="player-card bench/coach year-X" などを付与して並べる… -->
+    </section>
+
+    <!-- ギャラリー用のセクションを追加。初期は非表示 -->
+    <section id="gallery-section" class="gallery">
+        <!-- 例：画像ファイルが images/gallery1.jpg～gallery6.jpg の場合 -->
+        <img src="images/gallery1.jpg" alt="集合写真１">
+        <img src="images/gallery2.jpg" alt="集合写真２">
+        <img src="images/gallery3.jpg" alt="集合写真３">
+        <img src="images/gallery4.jpg" alt="集合写真４">
+        <img src="images/gallery5.jpg" alt="集合写真５">
+        <img src="images/gallery6.jpg" alt="集合写真６">
     </section>
   </main>
 
