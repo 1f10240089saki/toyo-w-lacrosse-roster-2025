@@ -32,7 +32,7 @@
       min-height: 100vh;
     }
 
-    /* カスタムスクロールバー（視認性向上） */
+    /* カスタムスクロールバー */
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -62,10 +62,10 @@
       font-weight: 900;
       letter-spacing: 1px;
       padding-bottom: 12px;
-      border-bottom: 2px solid #ffffff; /* 白の実線 */
+      border-bottom: 2px solid #ffffff;
     }
 
-    /* ソート選択の固定表示（スクロールしても常に上部へ） */
+    /* ソート選択の固定表示 */
     .filter-container {
       position: sticky;
       top: 0;
@@ -85,10 +85,10 @@
       cursor: pointer;
       outline: none;
       width: 100%;
-      max-width: 180px;
+      max-width: 220px;
     }
 
-    /* どのスマホサイズでも崩れず確実に2列配置 */
+    /* 2列配置 */
     .player-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -96,7 +96,7 @@
       width: 100%;
     }
 
-    /* 選手カード（浮き上がりエフェクト） */
+    /* 選手カード */
     .player-card {
       position: relative;
       background-color: #1a1e43;
@@ -116,6 +116,29 @@
       transform: translateY(-8px) scale(1.03);
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
       z-index: 2;
+    }
+
+    /* ポジション/スタッフ識別バッジ */
+    .position-badge {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background-color: rgba(11, 7, 74, 0.85);
+      color: #ffffff;
+      padding: 3px 7px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      border-radius: 4px;
+      border: 1px solid var(--card-border);
+      z-index: 5;
+      backdrop-filter: blur(2px);
+    }
+
+    /* スタッフ用バッジデザイン（オレンジ系で一目で差別化） */
+    .position-badge.staff-badge {
+      background-color: rgba(210, 105, 30, 0.9);
+      border-color: #ffa500;
+      color: #ffffff;
     }
 
     .player-img {
@@ -266,11 +289,15 @@
       <h1>26 TOYO LAX</h1>
     </header>
 
-    <!-- 固定表示されるソート機能 -->
+    <!-- ソート機能（ベンチ分離・スタッフ追加版） -->
     <div class="filter-container">
       <select id="sortFilter" class="filter-select">
         <option value="all">ALL</option>
-        <option value="bench">ベンチメンバー</option>
+        <optgroup label="ベンチ">
+          <option value="bench-all">ベンチ全員</option>
+          <option value="bench-player">ベンチメンバー（選手）</option>
+          <option value="bench-staff">ベンチスタッフ</option>
+        </optgroup>
         <optgroup label="学年別">
           <option value="grade-4">4年</option>
           <option value="grade-3">3年</option>
@@ -282,11 +309,12 @@
           <option value="pos-MF">MF(ミドルフィールド)</option>
           <option value="pos-DF">DF(ディフェンス)</option>
           <option value="pos-G">G(ゴールキーパー)</option>
+          <option value="pos-STAFF">スタッフ(MG/TR/SC/AS)</option>
         </optgroup>
       </select>
     </div>
 
-    <!-- 選手一覧（常に2列表示） -->
+    <!-- 選手一覧 -->
     <div class="player-grid" id="playerGrid"></div>
   </div>
 
@@ -309,6 +337,10 @@
       <div class="modal-info-group">
         <div class="modal-label">コートネーム</div>
         <div class="modal-value" id="infoCourtName"></div>
+      </div>
+      <div class="modal-info-group">
+        <div class="modal-label">ポジション / 区分</div>
+        <div class="modal-value" id="infoPosition"></div>
       </div>
       <div class="modal-info-group">
         <div class="modal-label">学年</div>
@@ -334,6 +366,9 @@
   </div>
 
   <script>
+    // スタッフのポジション定義
+    const staffPositions = ['MG', 'TR', 'SC', 'AS'];
+
     const players = [
       { number: 27, name: "Nina", courtName: "Nina", position: "AT", grade: "4年", isBench: true, department: "埼玉県立浦和北高等学校", history: "チアダンス、バスケ", hobby: "単発のバイトをすること", goal: "26チームで必ず一部昇格を果たします！！沢山応援していただけると嬉しいです！", image: "img/nina.png" },
       { number: 21, name: "Pere", courtName: "ぺれ", position: "G", grade: "4年", isBench: false, department: "品川エトワール女子高等学校", history: "テニス", hobby: "ダンス", goal: "一部昇格に貢献できるように頑張ります！", image: "img/pere.png" },
@@ -403,9 +438,16 @@
       playerGrid.innerHTML = '';
 
       currentFilteredPlayers.forEach((player, index) => {
+        const isStaff = staffPositions.includes(player.position);
+        const badgeClass = isStaff ? 'position-badge staff-badge' : 'position-badge';
+        const badgeText = isStaff ? `STAFF (${player.position})` : player.position;
+
         const card = document.createElement('div');
         card.className = 'player-card';
-        card.innerHTML = `<img src="${player.image}" class="player-img" alt="${player.name}">`;
+        card.innerHTML = `
+          <span class="${badgeClass}">${badgeText}</span>
+          <img src="${player.image}" class="player-img" alt="${player.name}">
+        `;
         card.addEventListener('click', () => openModal(index));
         playerGrid.appendChild(card);
       });
@@ -415,11 +457,17 @@
       const val = e.target.value;
       let filtered = players;
 
-      if (val === 'bench') {
+      if (val === 'bench-all') {
         filtered = players.filter(p => p.isBench);
+      } else if (val === 'bench-player') {
+        filtered = players.filter(p => p.isBench && !staffPositions.includes(p.position));
+      } else if (val === 'bench-staff') {
+        filtered = players.filter(p => p.isBench && staffPositions.includes(p.position));
       } else if (val.startsWith('grade-')) {
         const g = val.replace('grade-', '');
         filtered = players.filter(p => p.grade.startsWith(g));
+      } else if (val === 'pos-STAFF') {
+        filtered = players.filter(p => staffPositions.includes(p.position));
       } else if (val.startsWith('pos-')) {
         const pos = val.replace('pos-', '');
         filtered = players.filter(p => p.position === pos);
@@ -440,9 +488,11 @@
       }
 
       const player = currentFilteredPlayers[currentIndex];
+      const isStaff = staffPositions.includes(player.position);
 
       document.getElementById('modalImg').src = player.image;
       document.getElementById('infoCourtName').textContent = player.courtName;
+      document.getElementById('infoPosition').textContent = `${player.position} (${isStaff ? 'スタッフ' : '選手'})`;
       document.getElementById('infoGrade').textContent = player.grade;
       document.getElementById('infoDepartment').textContent = player.department;
       document.getElementById('infoHistory').textContent = player.history;
@@ -489,7 +539,7 @@
       else if (swipeDistance < -40) updateModalContent(currentIndex + 1);
     }
 
-    /* 「上に戻る」ボタンのスクロール制御 */
+    /* 上に戻るボタン */
     window.addEventListener('scroll', () => {
       if (window.scrollY > 150) {
         scrollTopBtn.classList.add('visible');
