@@ -118,29 +118,6 @@
       z-index: 2;
     }
 
-    /* ポジション/スタッフ識別バッジ */
-    .position-badge {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      background-color: rgba(11, 7, 74, 0.85);
-      color: #ffffff;
-      padding: 3px 7px;
-      font-size: 0.7rem;
-      font-weight: bold;
-      border-radius: 4px;
-      border: 1px solid var(--card-border);
-      z-index: 5;
-      backdrop-filter: blur(2px);
-    }
-
-    /* スタッフ用バッジデザイン（オレンジ系で一目で差別化） */
-    .position-badge.staff-badge {
-      background-color: rgba(210, 105, 30, 0.9);
-      border-color: #ffa500;
-      color: #ffffff;
-    }
-
     .player-img {
       width: 100%;
       height: 100%;
@@ -289,15 +266,11 @@
       <h1>26 TOYO LAX</h1>
     </header>
 
-    <!-- ソート機能（ベンチ分離・スタッフ追加版） -->
+    <!-- ソート機能 -->
     <div class="filter-container">
       <select id="sortFilter" class="filter-select">
         <option value="all">ALL</option>
-        <optgroup label="ベンチ">
-          <option value="bench-all">ベンチ全員</option>
-          <option value="bench-player">ベンチメンバー（選手）</option>
-          <option value="bench-staff">ベンチスタッフ</option>
-        </optgroup>
+        <option value="bench">ベンチメンバー</option>
         <optgroup label="学年別">
           <option value="grade-4">4年</option>
           <option value="grade-3">3年</option>
@@ -374,11 +347,11 @@
       { number: 21, name: "Pere", courtName: "ぺれ", position: "G", grade: "4年", isBench: false, department: "品川エトワール女子高等学校", history: "テニス", hobby: "ダンス", goal: "一部昇格に貢献できるように頑張ります！", image: "img/pere.png" },
       { number: 3, name: "Ren", courtName: "れん", position: "MF", grade: "4年", isBench: true, department: "駒場高校", history: "バスケットボール", hobby: "カフェ巡り", goal: "全試合フル出場！", image: "img/ren.png" },
       { number: 2, name: "うぃん", courtName: "うぃん", position: "DF", grade: "4年", isBench: true, department: "仙台育英高等学校", history: "サッカー、水泳、ラクロス", hobby: "ドラマ見る", goal: "ラストイヤー絶対一部昇格します！私が活躍します！", image: "img/win.png" },
-      { number: 5, name: "ろん", courtName: "ろん", position: "DF", grade: "4年", isBench: true, department: "東洋高校", history: "バスケットボール、ラクロス", hobby: "同期の写真や動画を遡ること🫶", goal: "守って、繋いで、決めて。26チーム全員で必ず一部昇格を成し遂げます👊", image: "img/ron.png" },
+      { number: 5, name: "ろん", courtName: "ろん", position: "DF", grade: "4年", isBench: false, department: "東洋高校", history: "バスケットボール、ラクロス", hobby: "同期の写真や動画を遡ること🫶", goal: "守って、繋いで、決めて。26チーム全員で必ず一部昇格を成し遂げます👊", image: "img/ron.png" },
       { number: 1, name: "らき", courtName: "らき", position: "G", grade: "4年", isBench: true, department: "花咲徳栄高校", history: "野球", hobby: "ちい活", goal: "全員で1部昇格できるよう精一杯頑張ります", image: "img/raki.png" },
       { number: 10, name: "すー", courtName: "すー", position: "MF", grade: "4年", isBench: true, department: "浜松聖星高等学校", history: "陸上競技", hobby: "グミ、プリン、スクイーズ", goal: "とにかく沢山走って、奪って繋げてシュートまで！東洋の流れ作ります！応援よろしくお願いいたします！", image: "img/suu.png" },
       { number: 9, name: "から", courtName: "から", position: "AT", grade: "4年", isBench: true, department: "安田学園高等学校", history: "ハンドボール、陸上", hobby: "愛犬と遊ぶ🐶", goal: "4年間の集大成をご覧あれ👀", image: "img/kara.png" },
-      { number: 99, name: "さに", courtName: "さに", position: "SC", grade: "4年", isBench: true, department: "桐蔭学園高等学校", history: "ラクロス", hobby: "ぐみ！", goal: "一部昇格して関わってくれた全てに人に感謝と恩返し。", image: "img/sani.png" },
+      { number: 99, name: "さに", courtName: "さに", position: "SC", grade: "4年", isBench: false, department: "桐蔭学園高等学校", history: "ラクロス", hobby: "ぐみ！", goal: "一部昇格して関わってくれた全てに人に感謝と恩返し。", image: "img/sani.png" },
       { number: 12, name: "しあ", courtName: "しあ", position: "AT", grade: "4年", isBench: true, department: "向丘高校", history: "バレーボール", hobby: "アーモンドミルクラテ", goal: "絶対この53人で一部昇格果します！", image: "img/sia.png" },
       { number: 11, name: "どり", courtName: "どり", position: "MF", grade: "4年", isBench: true, department: "都立東大和南", history: "水泳", hobby: "温泉♨️行きたい旅行先たくさん調べる", goal: "集大成魅せます！！東洋が一部昇格します！", image: "img/dori.png" },
       { number: 17, name: "りく", courtName: "りく", position: "AT", grade: "4年", isBench: false, department: "埼玉栄", history: "サッカー", hobby: "シアの観察", goal: "全身全霊！！！", image: "img/riku.png" },
@@ -438,16 +411,9 @@
       playerGrid.innerHTML = '';
 
       currentFilteredPlayers.forEach((player, index) => {
-        const isStaff = staffPositions.includes(player.position);
-        const badgeClass = isStaff ? 'position-badge staff-badge' : 'position-badge';
-        const badgeText = isStaff ? `STAFF (${player.position})` : player.position;
-
         const card = document.createElement('div');
         card.className = 'player-card';
-        card.innerHTML = `
-          <span class="${badgeClass}">${badgeText}</span>
-          <img src="${player.image}" class="player-img" alt="${player.name}">
-        `;
+        card.innerHTML = `<img src="${player.image}" class="player-img" alt="${player.name}">`;
         card.addEventListener('click', () => openModal(index));
         playerGrid.appendChild(card);
       });
@@ -457,12 +423,8 @@
       const val = e.target.value;
       let filtered = players;
 
-      if (val === 'bench-all') {
+      if (val === 'bench') {
         filtered = players.filter(p => p.isBench);
-      } else if (val === 'bench-player') {
-        filtered = players.filter(p => p.isBench && !staffPositions.includes(p.position));
-      } else if (val === 'bench-staff') {
-        filtered = players.filter(p => p.isBench && staffPositions.includes(p.position));
       } else if (val.startsWith('grade-')) {
         const g = val.replace('grade-', '');
         filtered = players.filter(p => p.grade.startsWith(g));
