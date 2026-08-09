@@ -2,1144 +2,490 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>2026 東洋女子ラクロス部 Roster</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="site-header">
-    <img class="site-hedder-img" src="hedder_TU_IMG.png" alt="ヘッダー画像">
-    <img class="site-hedder-img" src="hedder_IMG.jpg" alt="全員画像">
-    <h1>2026 東洋女子ラクロス部 Roster</h1>
-    <h4>【ご注意】</h2>
-    <p>このページは保護者・OG向けの非公開リンクです。無断転用・再配布はお控えください。</p>
-    <div class="main-nav">
-        <button id="btn-roster" class="active">Roster</button>
-        <button id="btn-gallery">Photo Gallery</button>
-    </div>
-  </header>
-
-  
-  <nav href="#" class="filter-nav">
-    <button data-filter="all" class="active">ALL</button>
-    <!-- <button data-filter="bench">ベンチメンバー</button></br> -->
-    <button data-filter="year-4">4年</button>
-    <button data-filter="year-3">3年</button>
-    <button data-filter="year-2">2年</button>
-    <button data-filter="year-1">1年</button>
-  </nav>
-
-  <!-- モーダル本体 -->
-    <div id="noticeModal" class="modal hidden">
-    <div class="modal-content">
-        <h2>ご注意</h2>
-        <p>このページは保護者・OG向けの非公開リンクです。無断転用・再配布はお控えください。</p>
-        <p>ユニホーム番号が一部異なる場合があります。ご了承ください。</p>
-        <button id="closeModal">閉じる</button>
-    </div>
-    </div>
-
-
-  <!-- java -->
-    <script>
-    document.addEventListener("DOMContentLoaded", function(){
-
-        // ---- フィルタ＆ソート機能 ----
-        const buttons = document.querySelectorAll(".filter-nav button");
-        const cards   = document.querySelectorAll(".player-card");
-        const roster  = document.querySelector(".roster");
-
-        // 番号順に並び替え（key="all" または "bench" を受け取る）
-        function sortByNumber(key = "all") {
-        // ソート対象を決める
-        const selector = key === "all"
-            ? ".player-card"
-            : `.player-card.${key}`;
-        const list = Array.from(roster.querySelectorAll(selector));
-        // data-number 属性を昇順にソート
-        list.sort((a, b) => {
-            return parseInt(a.dataset.number, 10)
-                - parseInt(b.dataset.number, 10);
-        });
-        // DOM 上の並び替え
-        list.forEach(el => roster.appendChild(el));
-        }
-
-        // ボタンにクリックイベントをバインド
-        buttons.forEach(btn => {
-        btn.addEventListener("click", function(){
-            // ① ボタンの active 切り替え
-            buttons.forEach(b => b.classList.remove("active"));
-            this.classList.add("active");
-
-            const key = this.dataset.filter;
-
-            // ② カードの表示／非表示
-            cards.forEach(card => {
-            if (key === "all" || card.classList.contains(key)) {
-                card.classList.remove("hidden");
-            } else {
-                card.classList.add("hidden");
-            }
-            });
-
-            // ③ ソート処理（全員 or ベンチのみ）
-            if (key === "all" || key === "bench") {
-            sortByNumber(key);
-            }
-
-            // ④ bench（ベンチ）表示中だけ .bench-active を付与
-            roster.classList.toggle("bench-active", key === "bench");
-      });
-    });
-
-
-    // ---- オーバーレイ開閉機能 ----
-    // .container 要素をクリックすると overlay をトグル
-    document.querySelectorAll(".container").forEach(container => {
-      container.addEventListener("click", function(e){
-        if (this.classList.contains("active")) {
-          this.classList.remove("active");
-        } else {
-          // 他が開いていたら閉じる
-          document.querySelectorAll(".container.active")
-            .forEach(opened => opened.classList.remove("active"));
-          this.classList.add("active");
-        }
-        e.stopPropagation(); // クリックイベントのバブリングを止める
-      });
-    });
-    // 画面どこかをクリックしたらすべてのオーバーレイを閉じる
-    document.addEventListener("click", function(){
-      document.querySelectorAll(".container.active")
-        .forEach(opened => opened.classList.remove("active"));
-    });
-
-    // ページができたらモーダルを表示
-    document.addEventListener("DOMContentLoaded", function(){
-        const modal = document.getElementById("noticeModal");
-        const btn   = document.getElementById("closeModal");
-        // hidden クラスをはずして表示
-        modal.classList.remove("hidden");
-
-        // 閉じるボタンで非表示に
-        btn.addEventListener("click", function(){
-            modal.classList.add("hidden");
-        });
-    });
-
-
-  });
-
-// Roster Photoギャラリー
-    document.addEventListener("DOMContentLoaded", function(){
-    const btnRoster  = document.getElementById("btn-roster");
-    const btnGallery = document.getElementById("btn-gallery");
-    const rosterSec  = document.getElementById("roster-section");
-    const gallerySec = document.getElementById("gallery-section");
-    const filterNav  = document.querySelector(".filter-nav"); // もし非表示にしたければ
-
-    // Roster タブを押したとき
-    btnRoster.addEventListener("click", function(){
-        // ボタンの active 切り替え
-        btnRoster.classList.add("active");
-        btnGallery.classList.remove("active");
-        // セクション表示切替
-        rosterSec.style.display  = "grid";    // or "" （元のCSSに任せる）
-        gallerySec.style.display = "none";
-        // フィルタナビを表示したいなら
-        if(filterNav) filterNav.style.display = "";
-    });
-
-    // フォトギャラリー タブを押したとき
-    btnGallery.addEventListener("click", function(){
-        btnRoster.classList.remove("active");
-        btnGallery.classList.add("active");
-        rosterSec.style.display  = "none";
-        gallerySec.style.display = "grid";
-        // ロスター用フィルタが不要なら非表示に
-        if(filterNav) filterNav.style.display = "none";
-    });
-    });
-  </script>
-
-
-  <main>
-    <section id="roster-section" class="roster">
-      <!-- ↓ ここからカードを必要数だけ繰り返し ↓ -->
-        <div class="player-card year-4" data-number="12">
-            <div class="photo-wrap">
-            <img src="img3/RAKI.PNG" alt="12 らき">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>経営学部<br>第2部経営学科</dd>
-                        <dt>身長</dt><dd>156cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>野球、サッカー</dd>
-                    </dl>
-                </div>
-                <span class="number0">12</span>
-            </div>
-            <div class="info">
-                <p class="name">らき</p>
-                <p class="year">4年</p>
-                <p class="position">G</p>
-            </div>
-        </div>
-
-
-        <div class="player-card year-4" data-number="3">
-            <div class="photo-wrap">
-            <img src="img3/WIN.PNG" alt="3 うぃん">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>文学部<br>教育学科</dd>
-                        <dt>身長</dt><dd>162cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>水泳、サッカー、ラクロス</dd>
-                    </dl>
-                </div>
-                <span class="number0">3</span>
-            </div>
-            <div class="info">
-                <p class="name">うぃん</p>
-                <p class="year">4年</p>
-                <p class="position">DF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-4" data-number="5">
-            <div class="photo-wrap">
-            <img src="img3/REN.PNG" alt="5 れん">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>身長</dt><dd>154cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>バスケットボール</dd>
-                    </dl>
-                </div>
-                <span class="number0">5</span>
-            </div>
-            <div class="info">
-                <p class="name">れん</p>
-                <p class="year">4年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-        
-
-        <div class="player-card year-3" data-number="28">
-            <div class="photo-wrap">
-            <img src="img2/RAME.PNG" alt="28 らめ">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>国際観光学部<br>国際観光学科</dd>
-                        <dt>身長</dt><dd>152cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>体操、バスケットボール、バドミントン、ラクロス</dd>
-                    </dl>
-                </div>
-                <span class="number">28</span>
-            </div>
-            <div class="info">
-                <p class="name">らめ</p>
-                <p class="year">3年</p>
-                <p class="position">DF</p>
-            </div>
-        </div>
-      
-
-        <div class="player-card year-4" data-number="13">
-            <div class="photo-wrap">
-            <img src="img3/SU.PNG" alt="13 すー">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>栄養科学科</dd>
-                        <dt>身長</dt><dd>158cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>陸上、水泳</dd>
-                    </dl>
-                </div>
-                <span class="number">13</span>
-            </div>
-            <div class="info">
-                <p class="name">すー</p>
-                <p class="year">4年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-4" data-number="11">
-            <div class="photo-wrap">
-            <img src="img3/RON.PNG" alt="11 ろん">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>社会学部<br>メディアコミュニケーション学科</dd>
-                        <dt>身長</dt><dd>157cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>バスケットボール、ラクロス</dd>
-                    </dl>
-                </div>
-                <span class="number">11</span>
-            </div>
-            <div class="info">
-                <p class="name">ろん</p>
-                <p class="year">4年</p>
-                <p class="position">DF</p>
-            </div>
-        </div>
-
-  
-
-        <div class="player-card year-2" data-number="22">
-            <div class="photo-wrap">
-            <img src="img1/IMG_RABI.PNG" alt="22 らび">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>栄養科学科</dd>
-                        <dt>身長</dt><dd>157cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>陸上、水泳、ハンドボール</dd>
-                    </dl>
-                </div>
-                <span class="number">22</span>
-            </div>
-            <div class="info">
-                <p class="name">らび</p>
-                <p class="year">2年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-3" data-number="33">
-            <div class="photo-wrap">
-            <img src="img2/RUKU.PNG" alt="33 るく">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>法学部<br>法律学科</dd>
-                        <dt>身長</dt><dd>164cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>野球</dd>
-                    </dl>
-                </div>
-                <span class="number">33</span>
-            </div>
-            <div class="info">
-                <p class="name">るく</p>
-                <p class="year">3年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-        
-        <div class="player-card year-4" data-number="4">
-            <div class="photo-wrap">
-            <img src="img3/RIKU.PNG" alt="4 りく">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>身長</dt><dd>157cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>サッカー</dd>
-                    </dl>
-                </div>
-                <span class="number">4</span>
-            </div>
-            <div class="info">
-                <p class="name">りく</p>
-                <p class="year">4年</p>
-                <p class="position">AT</p>
-            </div>
-        </div>
-
-    
-
-        <div class="player-card year-3" data-number="39">
-            <div class="photo-wrap">
-            <img src="img2/SHUN2.PNG" alt="39 しゅん">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>情報連携学部<br>情報連携学科</dd>
-                        <dt>身長</dt><dd>167cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>空手、陸上、テニス</dd>
-                    </dl>
-                </div>
-                <span class="number">39</span>
-            </div>
-            <div class="info">
-                <p class="name">しゅん</p>
-                <p class="year">3年</p>
-                <p class="position">MF</p>
-            </div>
-        </div> 
-
-        <div class="player-card year-3" data-number="31">
-            <div class="photo-wrap">
-            <img src="img2/SAWA.PNG" alt="31 さわ">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>文学部<br>教育学科</dd>
-                        <dt>身長</dt><dd>156cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>バスケットボール</dd>
-                    </dl>
-                </div>
-                <span class="number">31</span>
-            </div>
-            <div class="info">
-                <p class="name">さわ</p>
-                <p class="year">3年</p>
-                <p class="position">DF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-4" data-number="18">
-            <div class="photo-wrap">
-            <img src="img3/DORI.PNG" alt="18 どり">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>身長</dt><dd>148cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>水泳、ダンス</dd>
-                    </dl>
-                </div>
-                <span class="number">18</span>
-            </div>
-            <div class="info">
-                <p class="name">どり</p>
-                <p class="year">4年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-4" data-number="25">
-            <div class="photo-wrap">
-            <img src="img3/KARA2.PNG" alt="25 から">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>身長</dt><dd>170cm</dd>
-                        <dt>利き手</dt><dd>左</dd>
-                        <dt>出身スポーツ</dt><dd>陸上、ハンドボール</dd>
-                    </dl>
-                </div>
-                <span class="number">25</span>
-            </div>
-            <div class="info">
-                <p class="name">から</p>
-                <p class="year">4年</p>
-                <p class="position">AT</p>
-            </div>
-        </div>
-
-        <div class="player-card year-2" data-number="14">
-            <div class="photo-wrap">
-            <img src="img1/IMG_TAE.PNG" alt="14 たえ">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>身長</dt><dd>155cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>硬式テニス、陸上</dd>
-                    </dl>
-                </div>
-                <span class="number">14</span>
-            </div>
-            <div class="info">
-                <p class="name">たえ</p>
-                <p class="year">2年</p>
-                <p class="position">MF</p>
-            </div>
-        </div> 
-
-        <div class="player-card year-4" data-number="32">
-            <div class="photo-wrap">
-            <img src="img3/NINA.PNG" alt="32 にな">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>身長</dt><dd>157cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>チアダンス、バスケ</dd>
-                    </dl>
-                </div>
-                <span class="number">32</span>
-            </div>
-            <div class="info">
-                <p class="name">にな</p>
-                <p class="year">4年</p>
-                <p class="position">AT</p>
-            </div>
-        </div>
-
-        <div class="player-card year-3" data-number="9">
-            <div class="photo-wrap">
-            <img src="img2/SEN.PNG" alt="9 せん">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>社会学部<br>国際社会学科</dd>
-                        <dt>身長</dt><dd>158cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>水泳、空手、ソフトボール</dd>
-                    </dl>
-                </div>
-                <span class="number0">9</span>
-            </div>
-            <div class="info">
-                <p class="name">せん</p>
-                <p class="year">3年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-
-      
-
-        <div class="player-card year-4" data-number="0">
-            <div class="photo-wrap">
-            <img src="img3/SIA.PNG" alt="0 しあ">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>国際学部<br>国際地域学科</dd>
-                        <dt>身長</dt><dd>160cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>バレ、バスケ、テニス</dd>
-                    </dl>
-                </div>
-                <span class="number0">0</span>
-            </div>
-            <div class="info">
-                <p class="name">しあ</p>
-                <p class="year">4年</p>
-                <p class="position">AT</p>
-            </div>
-        </div>    
-
-        <div class="player-card year-3" data-number="21">
-            <div class="photo-wrap">
-            <img src="img2/TERU.PNG" alt="21 てる">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>身長</dt><dd>162cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>テニス、ラクロス</dd>
-                    </dl>
-                </div>
-                <span class="number">21</span>
-            </div>
-            <div class="info">
-                <p class="name">てる</p>
-                <p class="year">3年</p>
-                <p class="position">G</p>
-            </div>
-        </div>
-
-        <div class="player-card year-4" data-number="27">
-            <div class="photo-wrap">
-            <img src="img3/BAZU.PNG" alt="27 ばず">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>福祉社会デザイン学部<br>子ども支援学科</dd>
-                        <dt>身長</dt><dd>155cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>水泳、バレーボール、ラクロス</dd>
-                    </dl>
-                </div>
-                <span class="number">27</span>
-            </div>
-            <div class="info">
-                <p class="name">ばず</p>
-                <p class="year">4年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-3" data-number="16">
-            <div class="photo-wrap">
-            <img src="img2/RITA.PNG" alt="16 りた">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>身長</dt><dd>165cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>チアリーディング、ラクロス</dd>
-                    </dl>
-                </div>
-                <span class="number">16</span>
-            </div>
-            <div class="info">
-                <p class="name">りた</p>
-                <p class="year">3年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-2" data-number="43">
-            <div class="photo-wrap">
-            <img src="img1/IMG_TYIA.PNG" alt="43 てぃあ">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>経営学部<br>経営学科</dd>
-                        <dt>身長</dt><dd>164cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>バスケットボール、ラクロス</dd>
-                    </dl>
-                </div>
-                <span class="number">43</span>
-            </div>
-            <div class="info">
-                <p class="name">てぃあ</p>
-                <p class="year">2年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-3" data-number="38">
-            <div class="photo-wrap">
-            <img src="img2/NASA.PNG" alt="38 なさ">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>社会学部<br>社会学科</dd>
-                        <dt>身長</dt><dd>167cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>水泳、硬式・軟式テニス</dd>
-                    </dl>
-                </div>
-                <span class="number">38</span>
-            </div>
-            <div class="info">
-                <p class="name">なさ</p>
-                <p class="year">3年</p>
-                <p class="position">DF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-2" data-number="15">
-            <div class="photo-wrap">
-            <img src="img1/IMG_IYO.PNG" alt="15 いよ">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>食環境科学部<br>食環境科学科</dd>
-                        <dt>身長</dt><dd>162cm</dd>
-                        <dt>利き手</dt><dd>左</dd>
-                        <dt>出身スポーツ</dt><dd>水泳、バスケットボール、バドミントン</dd>
-                    </dl>
-                </div>
-                <span class="number">15</span>
-            </div>
-            <div class="info">
-                <p class="name">いよ</p>
-                <p class="year">2年</p>
-                <p class="position">MF</p>
-            </div>
-        </div> 
-
-        <div class="player-card year-2" data-number="29">
-            <div class="photo-wrap">
-            <img src="img1/IMG_KAI.PNG" alt="29 かい">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>身長</dt><dd>161cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>チアリーディング、バレーボール</dd>
-                    </dl>
-                </div>
-                <span class="number">29</span>
-            </div>
-            <div class="info">
-                <p class="name">かい</p>
-                <p class="year">2年</p>
-                <p class="position">AT</p>
-            </div>
-        </div>
-        
-        <div class="player-card year-3" data-number="35">
-            <div class="photo-wrap">
-            <img src="img2/RIZU.PNG" alt="35 りず">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>食環境科学部<br>フードデータサイエンス学科</dd>
-                        <dt>身長</dt><dd>162cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>水泳、テニス、体操</dd>
-                    </dl>
-                </div>
-                <span class="number">35</span>
-            </div>
-            <div class="info">
-                <p class="name">りず</p>
-                <p class="year">3年</p>
-                <p class="position">AT</p>
-            </div>
-        </div> 
-
-
-
-        <div class="player-card year-3" data-number="20">
-            <div class="photo-wrap">
-            <img src="img2/UI.PNG" alt="20 うい">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>経営学部<br>第2部経経営科</dd>
-                        <dt>身長</dt><dd>165cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>テニス、ハンドボール</dd>
-                    </dl>
-                </div>
-                <span class="number">20</span>
-            </div>
-            <div class="info">
-                <p class="name">うい</p>
-                <p class="year">3年</p>
-                <p class="position">DF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-2" data-number="-">
-            <div class="photo-wrap">
-            <img src="img1/IMG_YORU.PNG" alt="- よる">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>生命科学部<br>生命科学科</dd>
-                        <dt>身長</dt><dd>155cm</dd>
-                        <dt>利き手</dt><dd>左</dd>
-                        <dt>出身スポーツ</dt><dd>ソフトボール、ソフトテニス、水泳</dd>
-                    </dl>
-                </div>
-                <span class="number">-</span>
-            </div>
-            <div class="info">
-                <p class="name">よる</p>
-                <p class="year">2年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-2" data-number="30">
-            <div class="photo-wrap">
-            <img src="img1/IMG_MATI.PNG" alt="30 まち">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>情報連携学部<br>情報連携学科</dd>
-                        <dt>身長</dt><dd>161cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>サッカー、バスケットボール、弓道</dd>
-                    </dl>
-                </div>
-                <span class="number">30</span>
-            </div>
-            <div class="info">
-                <p class="name">まち</p>
-                <p class="year">2年</p>
-                <p class="position">MF</p>
-            </div>
-        </div> 
-
-        <div class="player-card year-2" data-number="10">
-            <div class="photo-wrap">
-            <img src="img1/IMG_MOKA.PNG" alt="10 もか">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>食環境科学部<br>食環境科学科</dd>
-                        <dt>身長</dt><dd>162cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>陸上、バレーボール、ラクロス</dd>
-                    </dl>
-                </div>
-                <span class="number">10</span>
-            </div>
-            <div class="info">
-                <p class="name">もか</p>
-                <p class="year">2年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-3" data-number="44">
-            <div class="photo-wrap">
-            <img src="img2/CHAMU.PNG" alt="44 ちゃむ">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>身長</dt><dd>162cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>水泳、バスケットボール、空手、ソフトボール</dd>
-                    </dl>
-                </div>
-                <span class="number">44</span>
-            </div>
-            <div class="info">
-                <p class="name">ちゃむ</p>
-                <p class="year">3年</p>
-                <p class="position">G</p>
-            </div>
-        </div> 
-
-        <div class="player-card year-2" data-number="23">
-            <div class="photo-wrap">
-            <img src="img1/IMG_MARE.PNG" alt="23 まれ">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>法学部<br>法律学科</dd>
-                        <dt>身長</dt><dd>150cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>水泳、バドミントン</dd>
-                    </dl>
-                </div>
-                <span class="number">23</span>
-            </div>
-            <div class="info">
-                <p class="name">まれ</p>
-                <p class="year">2年</p>
-                <p class="position">G</p>
-            </div>
-        </div> 
-
-        <div class="player-card year-2" data-number="-">
-            <div class="photo-wrap">
-            <img src="img1/IMG_MIA.PNG" alt="- みあ">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>身長</dt><dd>154cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>陸上</dd>
-                    </dl>
-                </div>
-                <span class="number">-</span>
-            </div>
-            <div class="info">
-                <p class="name">みあ</p>
-                <p class="year">2年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-
-       
-        <div class="player-card year-2" data-number="6">
-            <div class="photo-wrap">
-            <img src="img1/IMG_NAKO.PNG" alt="6 なこ">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>社会学部<br>国際社会学科</dd>
-                        <dt>身長</dt><dd>158cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>サッカー、体操、水泳、バスケットボール</dd>
-                    </dl>
-                </div>
-                <span class="number0">6</span>
-            </div>
-            <div class="info">
-                <p class="name">なこ</p>
-                <p class="year">2年</p>
-                <p class="position">MF</p>
-            </div>
-        </div>
-
-        <div class="player-card year-2" data-number="36">
-            <div class="photo-wrap">
-            <img src="img1/IMG_SONO.PNG" alt="36 その">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>生命科学部<br>生体医工学科</dd>
-                        <dt>身長</dt><dd>159cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>硬式テニス</dd>
-                    </dl>
-                </div>
-                <span class="number">36</span>
-            </div>
-            <div class="info">
-                <p class="name">その</p>
-                <p class="year">2年</p>
-                <p class="position">DF</p>
-            </div>
-        </div>
-
-                <div class="player-card year-2" data-number="50">
-            <div class="photo-wrap">
-            <img src="img1/IMG_NANA.PNG" alt="50 なな">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>生命科学部<br>生命科学科</dd>
-                        <dt>身長</dt><dd>159cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>ハンドボール、陸上、チアダンス</dd>
-                    </dl>
-                </div>
-                <span class="number">50</span>
-            </div>
-            <div class="info">
-                <p class="name">なな</p>
-                <p class="year">2年</p>
-                <p class="position">MF</p>
-            </div>
-        </div> 
-
-        <div class="player-card year-4" data-number="7">
-            <div class="photo-wrap">
-            <img src="img3/PERE.PNG" alt="7 ぺれ">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>栄養科学科</dd>
-                        <dt>身長</dt><dd>153cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>テニス</dd>
-                    </dl>
-                </div>
-                <span class="number">7</span>
-            </div>
-            <div class="info">
-                <p class="name">ぺれ</p>
-                <p class="year">4年</p>
-                <p class="position">G</p>
-            </div>
-        </div>
-
-        <div class="player-card year-2" data-number="-">
-            <div class="photo-wrap">
-            <img src="" alt="- ぴな">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>-<br>-</dd>
-                        <dt>身長</dt><dd>-cm</dd>
-                        <dt>利き手</dt><dd>右</dd>
-                        <dt>出身スポーツ</dt><dd>-</dd>
-                    </dl>
-                </div>
-                <span class="number">-</span>
-            </div>
-            <div class="info">
-                <p class="name">ぴな</p>
-                <p class="year">2年</p>
-                <p class="position">G</p>
-            </div>
-        </div> 
-
-        <div class="player-card year-4" data-number="SC">
-            <div class="photo-wrap">
-            <img src="img3/SANI.PNG" alt="SC さに">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>出身スポーツ</dt><dd>体操、水泳、チアリーディング、ラクロス</dd>
-                    </dl>
-                </div>
-                <span class="numberS">SC</span>
-            </div>
-            <div class="info">
-                <p class="name">さに</p>
-                <p class="year">4年</p>
-                <p class="position">学生コーチ</p>
-            </div>
-        </div>
-       
-
-        <div class="player-card year-3" data-number="MG">
-            <div class="photo-wrap">
-            <img src="img2/NIMO2.PNG" alt="MG にも">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>福祉社会デザイン学部<br>社会福祉学科</dd>
-                        <dt>出身スポーツ</dt><dd>陸上MG</dd>
-                    </dl>
-                </div>
-                <span class="numberS">MG</span>
-            </div>
-            <div class="info">
-                <p class="name">にも</p>
-                <p class="year">3年</p>
-                <p class="position">マネージャー</p>
-            </div>
-        </div> 
-
-        <div class="player-card year-2" data-number="MG">
-            <div class="photo-wrap">
-            <img src="img1/TOKI2.PNG" alt="MG とき">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>法学部第２部<br>法律学科</dd>
-                        <dt>出身スポーツ</dt><dd>バスケットボール</dd>
-                    </dl>
-                </div>
-                <span class="numberS">MG</span>
-            </div>
-            <div class="info">
-                <p class="name">とき</p>
-                <p class="year">2年</p>
-                <p class="position">マネージャー</p>
-            </div>
-        </div>
-
-
-        <div class="player-card year-3" data-number="TR">
-            <div class="photo-wrap">
-            <img src="img2/HYUU.PNG" alt="TR ひゅう">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>出身スポーツ</dt><dd>ソフトボール、陸上</dd>
-                    </dl>
-                </div>
-                <span class="numberS">TR</span>
-                <span class="staff-label">ベンチスタッフ</span>
-            </div>
-            <div class="info">
-                <p class="name">ひゅう</p>
-                <p class="year">3年</p>
-                <p class="position">トレーナー</p>
-            </div>
-        </div>
-
- 
-        <div class="player-card year-2" data-number="TR">
-            <div class="photo-wrap">
-            <img src="img1/IMG_SARA.PNG" alt="TR さら">
-                <div class="overlay">
-                    <dl>
-                        <dt>学部学科</dt><dd>健康スポーツ学部<br>健康スポーツ学科</dd>
-                        <dt>出身スポーツ</dt><dd>卓球</dd>
-                    </dl>
-                </div>
-                <span class="numberS">TR</span>
-            </div>
-            <div class="info">
-                <p class="name">さら</p>
-                <p class="year">2年</p>
-                <p class="position">トレーナー</p>
-            </div>
-        </div> 
-
-
-
-
-      <!-- …他の部員も同様に class="player-card bench/coach year-X" などを付与して並べる… -->
-    </section>
-
-    <!-- ギャラリー用のセクションを追加。初期は非表示 -->
-    <section id="gallery-section" class="gallery">
-        <!-- 例：画像ファイルが images/gallery1.jpg～gallery6.jpg の場合 -->
-        <img src="img_ALL/IMG_5526.JPG">
-        <img src="img_ALL/IMG_5395.JPG">
-        <img src="img_ALL/IMG_5524.JPG">
-        <img src="img_ALL/IMG_5525.JPG">
-        <img src="img_ALL/IMG_5527.JPG">
-        <img src="img_ALL/IMG_5529.JPG">
-        <img src="img_ALL/IMG_5532.JPG">
-        <img src="img_ALL/IMG_5531.JPG">
-        <img src="img_ALL/IMG_5533.JPG">
-        <img src="img_ALL/IMG_5539.JPG">
-        <img src="img_ALL/IMG_5540.JPG">
-        <img src="img_ALL/IMG_5541.JPG">
-        <img src="img_ALL/IMG_5542.JPG">
-        <img src="img_ALL/IMG_5543.JPG">
-        <img src="img_ALL/IMG_5545.JPG">
-        <img src="img_ALL/IMG_5547.JPG">
-        <img src="img_ALL/IMG_5549.JPG">
-        <img src="img_ALL/IMG_5550.JPG">
-        <img src="img_ALL/IMG_5551.JPG">
-        <img src="img_ALL/IMG_5552.JPG">
-        <img src="img_ALL/IMG_5553.JPG">
-        <img src="img_ALL/IMG_5554.JPG">
-        <img src="img_ALL/IMG_5555.JPG">
-        <img src="img_ALL/IMG_5559.JPG">
-        <img src="img_ALL/IMG_5560.JPG">
-        <img src="img_ALL/IMG_5561.JPG">
-        <img src="img_ALL/IMG_5562.JPG">
-        <img src="img_ALL/IMG_5564.JPG">
-        <img src="img_ALL/IMG_5565.JPG">
-        <img src="img_ALL/IMG_5566.JPG">
-        <img src="img_ALL/IMG_5567.JPG">
-        <img src="img_ALL/IMG_5569.JPG">
-        <img src="img_ALL/IMG_5571.JPG">
-        <img src="img_ALL/IMG_5572.JPG">
-        <img src="img_ALL/IMG_5573.JPG">
-        <img src="img_ALL/IMG_5574.JPG">
-    </section>
-  </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <footer class="site-footer">
-    <p>© 2026 東洋女子ラクロス部</p>
-  </footer>
-
-
-  <!-- ページトップへ戻るボタン -->
-  <button id="to-top">トップへ</button>
-
-
-  <script>
-    document.querySelectorAll('.filter-nav button').forEach(btn => {
-        btn.addEventListener('click', function(){
-            // 1) active 切り替え
-            document.querySelectorAll('.filter-nav button').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-
-            // 2) フィルタ処理
-            const key = this.dataset.filter;
-            document.querySelectorAll('.player-card').forEach(card => {
-            if (key === 'all' || card.classList.contains(key)) {
-                card.classList.remove('hidden');
-            } else {
-                card.classList.add('hidden');
-            }
-            });
-
-            // 3) ソート呼び出し
-            //    「all」でも「bench」でも、それぞれの対象を番号順に並べ替え
-            if (key === 'all' || key === 'bench') {
-            sortByNumber(key);
-            }
-        });
-    });
-
-        /**
-     * key が "all" の場合は全カードを、その他は
-     * .player-card.key のみを番号順に並び替え
-     */
-    function sortByNumber(key = "all") {
-    const roster = document.querySelector('.roster');
-    // ソート対象を取得
-    const selector = key === "all"
-        ? '.player-card'
-        : `.player-card.${key}`;
-    const cards = Array.from(roster.querySelectorAll(selector));
-    // data-number 昇順でソート
-    cards.sort((a, b) => parseInt(a.dataset.number,10) - parseInt(b.dataset.number,10));
-    // 並び替えたカードを一度に append
-    cards.forEach(card => roster.appendChild(card));
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>26 TOYO LAX</title>
+  <style>
+    /* 全体スタイリング（メインカラー：紺・白・青） */
+    :root {
+      --bg-color: #0b074a;      /* 濃い紺色 */
+      --text-color: #ffffff;    /* 白 */
+      --card-border: #4a5482;   /* カード枠線 */
     }
 
-    // クリックでスムーズにページトップへ戻る
-    document.getElementById('to-top').addEventListener('click', function(){
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    /* 右側に常時スクロールバーを表示 */
+    html {
+      overflow-y: scroll;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    /* カスタムスクロールバー（視認性向上） */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-color);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--card-border);
+      border-radius: 4px;
+    }
+
+    /* スマホ画面サイズのコンテナ */
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      padding: 20px 16px 40px;
+    }
+
+    /* タイトルと白の実線 */
+    header {
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #ffffff; /* 白の実線 */
+    }
+
+    /* ソート選択の固定表示（スクロールしても常に上部へ） */
+    .filter-container {
+      position: sticky;
+      top: 0;
+      background-color: var(--bg-color);
+      padding: 12px 0;
+      z-index: 20;
+    }
+
+    .filter-select {
+      background-color: #ffffff;
+      color: #000000;
+      font-weight: bold;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      outline: none;
+      width: 100%;
+      max-width: 180px;
+    }
+
+    /* どのスマホサイズでも崩れず確実に2列配置 */
+    .player-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      width: 100%;
+    }
+
+    /* 選手カード（浮き上がりエフェクト） */
+    .player-card {
+      position: relative;
+      background-color: #1a1e43;
+      border: 2px solid var(--card-border);
+      aspect-ratio: 4 / 5;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease;
+      will-change: transform, box-shadow;
+      width: 100%;
+    }
+
+    .player-card:active,
+    .player-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+      z-index: 2;
+    }
+
+    .player-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 右下の「ページ上部に戻る」ボタン */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #0b074a;
+      border: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.3s ease, transform 0.2s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .scroll-top-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .scroll-top-btn:active {
+      transform: scale(0.9);
+    }
+
+    /* 詳細画面（モーダル） */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 100;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background-color: var(--bg-color);
+      width: 90%;
+      max-width: 400px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 28px 16px 24px;
+      border-radius: 16px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+      border: 1px solid var(--card-border);
+      transform: scale(0.85) translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1) translateY(0);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10;
+      line-height: 1;
+    }
+
+    .modal-image-wrapper {
+      position: relative;
+      width: 220px;
+      margin: 0 auto 20px auto;
+      touch-action: pan-y;
+    }
+
+    .modal-card-preview {
+      width: 220px;
+      height: 275px;
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      z-index: 5;
+    }
+
+    .nav-btn:active {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .nav-btn.prev { left: -20px; }
+    .nav-btn.next { right: -20px; }
+
+    .modal-info-group { margin-bottom: 14px; }
+    .modal-label { font-size: 0.85rem; color: #aaaaaa; margin-bottom: 2px; }
+    .modal-value { font-size: 1.25rem; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <header>
+      <h1>26 TOYO LAX</h1>
+    </header>
+
+    <!-- 固定表示されるソート機能 -->
+    <div class="filter-container">
+      <select id="sortFilter" class="filter-select">
+        <option value="all">ALL</option>
+        <option value="bench">ベンチメンバー</option>
+        <optgroup label="学年別">
+          <option value="grade-4">4年</option>
+          <option value="grade-3">3年</option>
+          <option value="grade-2">2年</option>
+          <option value="grade-1">1年</option>
+        </optgroup>
+        <optgroup label="ポジション別">
+          <option value="pos-AT">AT(アタッカー)</option>
+          <option value="pos-MF">MF(ミドルフィールド)</option>
+          <option value="pos-DF">DF(ディフェンス)</option>
+          <option value="pos-G">G(ゴールキーパー)</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <!-- 選手一覧（常に2列表示） -->
+    <div class="player-grid" id="playerGrid"></div>
+  </div>
+
+  <!-- 上に戻るボタン -->
+  <button id="scrollTopBtn" class="scroll-top-btn" aria-label="上に戻る">▲</button>
+
+  <!-- 詳細表示モーダル -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content" id="modalContent">
+      <span class="close-btn" id="closeBtn">&times;</span>
+      
+      <div class="modal-image-wrapper" id="modalImageWrapper">
+        <button class="nav-btn prev" id="prevBtn">&lt;</button>
+        <div class="modal-card-preview">
+          <img src="" id="modalImg" class="player-img" alt="選手画像">
+        </div>
+        <button class="nav-btn next" id="nextBtn">&gt;</button>
+      </div>
+
+      <div class="modal-info-group">
+        <div class="modal-label">コートネーム</div>
+        <div class="modal-value" id="infoCourtName"></div>
+      </div>
+      <div class="modal-info-group">
+        <div class="modal-label">学年</div>
+        <div class="modal-value" id="infoGrade"></div>
+      </div>
+      <div class="modal-info-group">
+        <div class="modal-label">学部学科</div>
+        <div class="modal-value" id="infoDepartment"></div>
+      </div>
+      <div class="modal-info-group">
+        <div class="modal-label">スポーツ歴</div>
+        <div class="modal-value" id="infoHistory"></div>
+      </div>
+      <div class="modal-info-group">
+        <div class="modal-label">マイブーム</div>
+        <div class="modal-value" id="infoHobby"></div>
+      </div>
+      <div class="modal-info-group">
+        <div class="modal-label">意気込み</div>
+        <div class="modal-value" id="infoGoal"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const players = [
+        { number: 27, name: "Nina", courtName: "Nina", position: "AT", grade: "4年", isBench: true, department: "埼玉県立浦和北高等学校", history: "チアダンス、バスケ", hobby: "単発のバイトをすること", goal: "26チームで必ず一部昇格を果たします！！沢山応援していただけると嬉しいです！", image: "img/nina.png" },
+
+        { number: 21, name: "Pere", courtName: "ぺれ", position: "G", grade: "4年", isBench: false, department: "品川エトワール女子高等学校", history: "テニス", hobby: "ダンス", goal: "一部昇格に貢献できるように頑張ります！", image: "img/pere.png" },
+    
+        { number: 3, name: "Ren", courtName: "れん", position: "MF", grade: "4年", isBench: true, department: "駒場高校", history: "バスケットボール", hobby: "カフェ巡り", goal: "全試合フル出場！", image: "img/ren.png" },
+
+        { number: 2, name: "うぃん", courtName: "うぃん", position: "DF", grade: "4年", isBench: true, department: "仙台育英高等学校", history: "サッカー、水泳、ラクロス", hobby: "ドラマ見る", goal: "ラストイヤー絶対一部昇格します！私が活躍します！", image: "img/win.png" },
+
+        { number: 5, name: "ろん", courtName: "ろん", position: "DF", grade: "4年", isBench: true, department: "東洋高校", history: "バスケットボール、ラクロス", hobby: "同期の写真や動画を遡ること🫶", goal: "守って、繋いで、決めて。26チーム全員で必ず一部昇格を成し遂げます👊", image: "img/ron.png" },
+
+        { number: 1, name: "らき", courtName: "らき", position: "G", grade: "4年", isBench: true, department: "花咲徳栄高校", history: "野球", hobby: "ちい活", goal: "全員で1部昇格できるよう精一杯頑張ります", image: "img/raki.png" },
+
+        { number: 10, name: "すー", courtName: "すー", position: "MF", grade: "4年", isBench: true, department: "浜松聖星高等学校", history: "陸上競技", hobby: "グミ、プリン、スクイーズ", goal: "とにかく沢山走って、奪って繋げてシュートまで！東洋の流れ作ります！応援よろしくお願いいたします！", image: "img/suu.png" },
+
+        { number: 9, name: "から", courtName: "から", position: "AT", grade: "4年", isBench: true, department: "安田学園高等学校", history: "ハンドボール、陸上", hobby: "愛犬と遊ぶ🐶", goal: "4年間の集大成をご覧あれ👀", image: "img/kara.png" },
+
+        { number: 99, name: "さに", courtName: "さに", position: "SC", grade: "4年", isBench: true, department: "桐蔭学園高等学校", history: "ラクロス", hobby: "ぐみ！", goal: "一部昇格して関わってくれた全てに人に感謝と恩返し。", image: "img/sani.png" },
+
+        { number: 12, name: "しあ", courtName: "しあ", position: "AT", grade: "4年", isBench: true, department: "向丘高校", history: "バレーボール", hobby: "アーモンドミルクラテ", goal: "絶対この53人で一部昇格果たします！", image: "img/sia.png" },
+
+
+
+
+
+
+
+
+
+
+    ];
+
+    let currentFilteredPlayers = [];
+    let currentIndex = 0;
+
+    const playerGrid = document.getElementById('playerGrid');
+    const sortFilter = document.getElementById('sortFilter');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const closeBtn = document.getElementById('closeBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const modalImageWrapper = document.getElementById('modalImageWrapper');
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    function renderPlayers(data) {
+      currentFilteredPlayers = [...data].sort((a, b) => a.number - b.number);
+      playerGrid.innerHTML = '';
+
+      currentFilteredPlayers.forEach((player, index) => {
+        const card = document.createElement('div');
+        card.className = 'player-card';
+        card.innerHTML = `<img src="${player.image}" class="player-img" alt="${player.name}">`;
+        card.addEventListener('click', () => openModal(index));
+        playerGrid.appendChild(card);
+      });
+    }
+
+    sortFilter.addEventListener('change', (e) => {
+      const val = e.target.value;
+      let filtered = players;
+
+      if (val === 'bench') {
+        filtered = players.filter(p => p.isBench);
+      } else if (val.startsWith('grade-')) {
+        const g = parseInt(val.replace('grade-', ''));
+        filtered = players.filter(p => p.grade === g);
+      } else if (val.startsWith('pos-')) {
+        const pos = val.replace('pos-', '');
+        filtered = players.filter(p => p.position === pos);
+      }
+
+      renderPlayers(filtered);
     });
 
+    function updateModalContent(index) {
+      if (currentFilteredPlayers.length === 0) return;
+      
+      if (index < 0) {
+        currentIndex = currentFilteredPlayers.length - 1;
+      } else if (index >= currentFilteredPlayers.length) {
+        currentIndex = 0;
+      } else {
+        currentIndex = index;
+      }
+
+      const player = currentFilteredPlayers[currentIndex];
+
+      document.getElementById('modalImg').src = player.image;
+      document.getElementById('infoCourtName').textContent = player.courtName;
+      document.getElementById('infoGrade').textContent = `${player.grade}年`;
+      document.getElementById('infoDepartment').textContent = player.department;
+      document.getElementById('infoHistory').textContent = player.history;
+      document.getElementById('infoHobby').textContent = player.hobby;
+      document.getElementById('infoGoal').textContent = player.goal;
+    }
+
+    function openModal(index) {
+      updateModalContent(index);
+      modalOverlay.classList.add('active');
+    }
+
+    closeBtn.addEventListener('click', () => modalOverlay.classList.remove('active'));
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) modalOverlay.classList.remove('active');
+    });
+
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateModalContent(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      updateModalContent(currentIndex + 1);
+    });
+
+    /* スワイプ処理 */
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    modalImageWrapper.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    modalImageWrapper.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+      const swipeDistance = touchEndX - touchStartX;
+      if (swipeDistance > 40) updateModalContent(currentIndex - 1);
+      else if (swipeDistance < -40) updateModalContent(currentIndex + 1);
+    }
+
+    /* 「上に戻る」ボタンのスクロール制御 */
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 150) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    renderPlayers(players);
   </script>
 </body>
 </html>
