@@ -335,107 +335,55 @@
 
   <script>
     const players = [
-        { number: 27, name: "Nina", courtName: "Nina", position: "AT", grade: "4年", isBench: true, department: "埼玉県立浦和北高等学校", history: "チアダンス、バスケ", hobby: "単発のバイトをすること", goal: "26チームで必ず一部昇格を果たします！！沢山応援していただけると嬉しいです！", image: "img/nina.png" },
-
-        { number: 21, name: "Pere", courtName: "ぺれ", position: "G", grade: "4年", isBench: false, department: "品川エトワール女子高等学校", history: "テニス", hobby: "ダンス", goal: "一部昇格に貢献できるように頑張ります！", image: "img/pere.png" },
-    
-        { number: 3, name: "Ren", courtName: "れん", position: "MF", grade: "4年", isBench: true, department: "駒場高校", history: "バスケットボール", hobby: "カフェ巡り", goal: "全試合フル出場！", image: "img/ren.png" },
-
-        { number: 2, name: "うぃん", courtName: "うぃん", position: "DF", grade: "4年", isBench: true, department: "仙台育英高等学校", history: "サッカー、水泳、ラクロス", hobby: "ドラマ見る", goal: "ラストイヤー絶対一部昇格します！私が活躍します！", image: "img/win.png" },
-
-        { number: 5, name: "ろん", courtName: "ろん", position: "DF", grade: "4年", isBench: true, department: "東洋高校", history: "バスケットボール、ラクロス", hobby: "同期の写真や動画を遡ること🫶", goal: "守って、繋いで、決めて。26チーム全員で必ず一部昇格を成し遂げます👊", image: "img/ron.png" },
-
-        { number: 1, name: "らき", courtName: "らき", position: "G", grade: "4年", isBench: true, department: "花咲徳栄高校", history: "野球", hobby: "ちい活", goal: "全員で1部昇格できるよう精一杯頑張ります", image: "img/raki.png" },
-
-        { number: 10, name: "すー", courtName: "すー", position: "MF", grade: "4年", isBench: true, department: "浜松聖星高等学校", history: "陸上競技", hobby: "グミ、プリン、スクイーズ", goal: "とにかく沢山走って、奪って繋げてシュートまで！東洋の流れ作ります！応援よろしくお願いいたします！", image: "img/suu.png" },
-
-        { number: 9, name: "から", courtName: "から", position: "AT", grade: "4年", isBench: true, department: "安田学園高等学校", history: "ハンドボール、陸上", hobby: "愛犬と遊ぶ🐶", goal: "4年間の集大成をご覧あれ👀", image: "img/kara.png" },
-
-        { number: 99, name: "さに", courtName: "さに", position: "SC", grade: "4年", isBench: true, department: "桐蔭学園高等学校", history: "ラクロス", hobby: "ぐみ！", goal: "一部昇格して関わってくれた全てに人に感謝と恩返し。", image: "img/sani.png" },
-
-        { number: 12, name: "しあ", courtName: "しあ", position: "AT", grade: "4年", isBench: true, department: "向丘高校", history: "バレーボール", hobby: "アーモンドミルクラテ", goal: "絶対この53人で一部昇格果たします！", image: "img/sia.png" },
-
-        { number: 11, name: "どり", courtName: "どり", position: "MF", grade: "4年", isBench: true, department: "都立東大和南", history: "水泳", hobby: "温泉♨️行きたい旅行先たくさん調べる", goal: "集大成魅せます！！東洋が一部昇格します！", image: "img/dori.png" },
-
-        { number: 17, name: "りく", courtName: "りく", position: "AT", grade: "4年", isBench: false, department: "埼玉栄", history: "サッカー", hobby: "シアの観察", goal: "全身全霊！！！", image: "img/riku.png" },
-
-        { number: 7, name: "ばず", courtName: "ばず", position: "AT", grade: "4年", isBench: true, department: "伊奈学園総合高校", history: "ラクロス", hobby: "編み物", goal: "4年間の集大成！大好きなみんなと全力で楽しんで勝ちます！", image: "img/buzz.png" },
-
-        { number: 15, name: "ちゃむ", courtName: "ちゃむ", position: "G", grade: "3年", isBench: true, department: "埼玉県立川口北高等学校", history: "水泳", hobby: "モノマネ", goal: "とにかくセーブして一部昇格に貢献できるように頑張ります⭐️", image: "img/cham.png" },
-
-        { number: 99, name: "ひゅう", courtName: "ひゅう", position: "TR", grade: "3年", isBench: false, department: "私立山村学園高校", history: "ソフトボール、陸上", hobby: "ドライブ", goal: "選手が怪我なくシーズンを終えられるように全力でサポートします！", image: "img/hyu.png" },
-
-        { number: 33, name: "りた", courtName: "りた", position: "MF", grade: "3年", isBench: true, department: "横浜市立東高校", history: "チアリーディング、ラクロス", hobby: "ごんちゃと紫が大好きです💜🧋", goal: "26リーグ自分らしく笑顔で駆け抜けます💨そして2部ベスト10になって叙々苑連れてってもらえるように頑張ります！！✨👊🏻", image: "img/rita.png" },
-
-        { number: 18, name: "なさ", courtName: "なさ", position: "DF", grade: "3年", isBench: false, department: "埼玉県立和光国際高校", history: "ソフテニス", hobby: "行きたい旅行先をリストアップすること！", goal: "チームの一員としてできることを全力でします！", image: "img/nasa.png" },
-
-        { number: 8, name: "りず", courtName: "りず", position: "AT", grade: "3年", isBench: true, department: "都立小平高校", history: "テニス、ソフトテニス、水泳", hobby: "ジム、韓国ドラマ、推し活", goal: "チームの勝利に貢献できるように頑張ります！", image: "img/liz.png" },
-
-        { number: 16, name: "るく", courtName: "るく", position: "MF", grade: "3年", isBench: true, department: "横浜隼人高校", history: "野球", hobby: "和菓子と部活帰りのアイス♡", goal: "皆様の応援を力に、チームとしても個人としてもベストな結果を残します!!", image: "img/ruku.png" },
-
-        { number: 38, name: "さわ", courtName: "さわ", position: "DF", grade: "3年", isBench: true, department: "市立柏高等学校", history: "バスケットボール", hobby: "チョコ食べることが大好きです🍫", goal: "チームの一部昇格に貢献できるよう精一杯頑張ります！", image: "img/sawa.png" },
-
-        { number: 99, name: "にも", courtName: "にも", position: "MG", grade: "3年", isBench: false, department: "安田学園高等学校", history: "陸上部マネ", hobby: "夏服を探すこと！", goal: "チーム全員で勝利を掴みます！", image: "img/nimo.png" },
-
-        { number: 30, name: "らめ", courtName: "らめ", position: "DF", grade: "3年", isBench: true, department: "伊奈学園総合高等学校", history: "ラクロス、バスケ、体操", hobby:    "海外映画鑑賞、 美味しそうなラーメン屋さんを調べる", goal: "自分らしく元気に2026の夏も駆け抜けます💖", image: "img/rame.png" },
-
-        { number: 28, name: "せん", courtName: "せん", position: "MF", grade: "3年", isBench: true, department: "都立江北高校", history: "ソフトボール", hobby: "ドラマを見ること", goal: "自分の力を出しきる、後悔しない", image: "img/sen.png" },
-
-        { number: 31, name: "てる", courtName: "てる", position: "G", grade: "3年", isBench: false, department: "本庄東高校", history: "ラクロス、ソフトテニス", hobby: "食べること", goal: "先輩の支えになれるように頑張ります！", image: "img/teru.png" },
-
-        { number: 4, name: "しゅん", courtName: "しゅん", position: "MF", grade: "3年", isBench: true, department: "都立高島高校", history: "陸上、硬式テニス、空手", hobby: "VIVANT・F1を見ること！", goal: "ドローから東洋の流れを作って、走って奪ってシュート決めます！！", image: "img/shun.png" },
-
-        { number: 24, name: "もか", courtName: "もか", position: "MF", grade: "2年", isBench: false, department: "岩倉高校", history: "バレーボール、陸上、ラクロス", hobby: "シャッフルアイランド", goal: "得意のグラボに誰よりも早く全力で駆け寄り、チームに流れをもってこられるよう頑張ります！", image: "img/moka.png"},
-
-        { number: 99, name: "さら", courtName: "さら", position: "TR", grade: "2年", isBench: false, department: "星野高校", history: "卓球", hobby: "Netflixを見ること", goal: "選手が安心できるベンチワークをする！", image: "img/sara.png" },
-
-        { number: 36, name: "その", courtName: "その", position: "DF", grade: "2年", isBench: false, department: "恵泉女学園高校", history: "硬式テニス", hobby: "パンを作っている人の動画をみること", goal: "チームの一員という自覚を持って一生懸命頑張ります！", image: "img/sono.png" },
-
-
-        { number: 99, name: "とき", courtName: "とき", position: "MG", grade: "2年", isBench: false, department: "都立飛鳥高校", history: "陸上、バスケ", hobby: "サッカー日本代表とアイドルを見ること！", goal: "選手を全力でサポートします！", image: "img/toki.png" },
-
-        { number: 44, name: "かい", courtName: "かい", position: "AT", grade: "2年", isBench: false, department: "都立国際高等学校", history: "チアリーディング バレーボール", hobby: "漫畫・アニメ・映画", goal: "絶対1部昇格", image: "img/kai.png" },
-
-        { number: 20, name: "まち", courtName: "まち", position: "MF", grade: "2年", isBench: false, department: "秦野高等学校", history: "バスケ、弓道", hobby: "韓ドラを見ること", goal: "1日1日の練習で少しでも成長できるように努力します。", image: "img/machi.png" },
-
-        { number: 26, name: "たえ", courtName: "たえ", position: "MF", grade: "2年", isBench: true, department: "習志野高校", history: "陸上、硬式テニス", hobby: "VIVANT見ること", goal: "26チームの一部昇格に少しでも貢献できるよう自分にできること精一杯頑張ります！", image: "img/tae.png" },
-
-        { number: 25, name: "らび", courtName: "らび", position: "MF", grade: "2年", isBench: false, department: "日本体育大学柏高等学校", history: "陸上、ハンドボール", hobby: "美味しくまぜそば探し", goal: "自分らしく全力で挑みます！", image: "img/lavi.png" },
-
-        { number: 14, name: "なこ", courtName: "なこ", position: "MF", grade: "2年", isBench: false, department: "跡見学園高校", history: "サッカー", hobby: "モモンガ", goal: "26チームの役に立てるよう精一杯頑張りますので、応援よろしくお願いします！💙📣", image: "img/nako.png" },
-
-        { number: 22, name: "よる", courtName: "よる", position: "AT", grade: "2年", isBench: false, department: "豊南高等学校", history: "なし", hobby: "なし", goal: "頑張ります", image: "img/yoru.png" },
-
-        { number: 43, name: "てぃあ", courtName: "てぃあ", position: "MF", grade: "2年", isBench: true, department: "東京成徳大学高等学校", history: "バスケットボール、ラクロス", hobby: "一人旅", goal: "自分の役割を全うしチームの勝利に貢献します！", image: "img/tia.png" },
-
-        { number: 23, name: "まれ", courtName: "まれ", position: "G", grade: "2年", isBench: true, department: "埼玉県立大宮中央高等学校", history: "バドミントン", hobby: "食事と睡眠", goal: "戦力になれるように頑張ります！", image: "img/mare.png" },
-
-        
-        { number: 35, name: "いよ", courtName: "いよ", position: 'MF', grade: '2年', isBench: false, department: '白梅学園高等学校', history: 'バレーボール', hobby: '音楽を聴くこと', goal: '苦手を克服してチームに貢献できるように頑張ります！', image: 'img/iyo.png' },
-
-        { number: 47, name: "なな", courtName: "なな", position: "MF", grade: "2年", isBench: false, department: "大垣北高校", history: "陸上、ハンドボール", hobby: "アイドル好き！", goal: "チームの勝利のために、自分にできることを全力で頑張ります！", image: "img/nana.png" },
-
-        { number: 59, name: "こと", courtName: "こと", position: "MF", grade: "1年", isBench: false, department: "N高等学校", history: "バレーボール", hobby: "バレーボール、アニメ", goal: "先輩方のプレーから沢山学びながら、応援とサポートでチームを盛り上げられるよう頑張ります！", image: "img/koto.png" },
-
-        { number: 52, name: "める", courtName: "める", position: "MF", grade: "1年", isBench: false, department: "大宮北高校", history: "ソフトテニス、バドミントン", hobby: "VIVANTを見ること、M!LK", goal: "練習でどんどん上手くなってサマーで点を決める", image: "img/meru.png" },
-
-        { number: 99, name: "ふう", courtName: "ふう", position: "AS", grade: "1年", isBench: false, department: "日本体育大学柏高等学校", history: "バドミントン バレーボール", hobby: "音楽を聞くこと", goal: "自分から積極的な動く26チームで勝ちに行く!!", image: "img/fuu.png" },
-
-        { number: 41, name: "りあ", courtName: "りあ", position: "MF", grade: "1年", isBench: false, department: "女子聖学院高等学校", history: "バレエ、ダンス", hobby: "音楽を聴くこと", goal: "リーグでは、全力で応援します！今シーズンは、サマーで全勝できるように頑張ります！", image: "img/ria.png" },
-
-        { number: 40, name: "はる", courtName: "はる", position: "MF", grade: "1年", isBench: false, department: "女子聖学院高等学校", history: "バスケ", hobby: "Netflixを観ること", goal: "リーグ戦では先輩方のかっこいい姿を全力で応援します！また、今シーズンは1年生らしく色々な事に挑戦します！！", image: "img/haru.png" },
-
-        { number: 32, name: "しぇり", courtName: "しぇり", position: "G", grade: "1年", isBench: false, department: "秋田県立本荘こうとうがっこ", history: "ダンス陸上", hobby: "ご飯食べにいく。", goal: "来年リーグベンチ入れるように今できること精一杯頑張る。", image: "img/sheri.png" },
-
-        { number: 56, name: "せら", courtName: "せら", position: "MF", grade: "1年", isBench: false, department: "湘南工科大学附属高等学校", history: "卓球", hobby: "ゲーム", goal: "しっかりと声を出して雰囲気づくり、応援をします。", image: "img/sera.png" },
-
-        { number: 51, name: "もあ", courtName: "もあ", position: "MF", grade: "1年", isBench: false, department: "横浜市立東高校", history: "ラクロス、水泳", hobby: "アイスを食べること", goal: "たくさん学んで、たくさん挑戦して、ラクロスを思いっきり楽しみます！", image: "img/moa.png" },
-
-        { number: 32, name: "るる", courtName: "るる", position: "MF", grade: "1年", isBench: false, department: "東洋大学京北高等学校", history: "器械体操、硬式テニス", hobby: "スムージーを飲むこと", goal: "全力で応援する！", image: "img/lulu.png" },
-
-        { number: 55, name: "もも", courtName: "もも", position: "MF", grade: "1年", isBench: false, department: "富士見中学校高等学校", history: "新体操、ダンス、水泳", hobby: "筋トレ、読書、縫い物", goal: "自分に出来ることを精一杯やりたいです！", image: "img/momo.png" },
-
-
+      { number: 27, name: "Nina", courtName: "Nina", position: "AT", grade: "4年", isBench: true, department: "埼玉県立浦和北高等学校", history: "チアダンス、バスケ", hobby: "単発のバイトをすること", goal: "26チームで必ず一部昇格を果たします！！沢山応援していただけると嬉しいです！", image: "img/nina.png" },
+      { number: 21, name: "Pere", courtName: "ぺれ", position: "G", grade: "4年", isBench: false, department: "品川エトワール女子高等学校", history: "テニス", hobby: "ダンス", goal: "一部昇格に貢献できるように頑張ります！", image: "img/pere.png" },
+      { number: 3, name: "Ren", courtName: "れん", position: "MF", grade: "4年", isBench: true, department: "駒場高校", history: "バスケットボール", hobby: "カフェ巡り", goal: "全試合フル出場！", image: "img/ren.png" },
+      { number: 2, name: "うぃん", courtName: "うぃん", position: "DF", grade: "4年", isBench: true, department: "仙台育英高等学校", history: "サッカー、水泳、ラクロス", hobby: "ドラマ見る", goal: "ラストイヤー絶対一部昇格します！私が活躍します！", image: "img/win.png" },
+      { number: 5, name: "ろん", courtName: "ろん", position: "DF", grade: "4年", isBench: true, department: "東洋高校", history: "バスケットボール、ラクロス", hobby: "同期の写真や動画を遡ること🫶", goal: "守って、繋いで、決めて。26チーム全員で必ず一部昇格を成し遂げます👊", image: "img/ron.png" },
+      { number: 1, name: "らき", courtName: "らき", position: "G", grade: "4年", isBench: true, department: "花咲徳栄高校", history: "野球", hobby: "ちい活", goal: "全員で1部昇格できるよう精一杯頑張ります", image: "img/raki.png" },
+      { number: 10, name: "すー", courtName: "すー", position: "MF", grade: "4年", isBench: true, department: "浜松聖星高等学校", history: "陸上競技", hobby: "グミ、プリン、スクイーズ", goal: "とにかく沢山走って、奪って繋げてシュートまで！東洋の流れ作ります！応援よろしくお願いいたします！", image: "img/suu.png" },
+      { number: 9, name: "から", courtName: "から", position: "AT", grade: "4年", isBench: true, department: "安田学園高等学校", history: "ハンドボール、陸上", hobby: "愛犬と遊ぶ🐶", goal: "4年間の集大成をご覧あれ👀", image: "img/kara.png" },
+      { number: 99, name: "さに", courtName: "さに", position: "SC", grade: "4年", isBench: true, department: "桐蔭学園高等学校", history: "ラクロス", hobby: "ぐみ！", goal: "一部昇格して関わってくれた全てに人に感謝と恩返し。", image: "img/sani.png" },
+      { number: 12, name: "しあ", courtName: "しあ", position: "AT", grade: "4年", isBench: true, department: "向丘高校", history: "バレーボール", hobby: "アーモンドミルクラテ", goal: "絶対この53人で一部昇格果します！", image: "img/sia.png" },
+      { number: 11, name: "どり", courtName: "どり", position: "MF", grade: "4年", isBench: true, department: "都立東大和南", history: "水泳", hobby: "温泉♨️行きたい旅行先たくさん調べる", goal: "集大成魅せます！！東洋が一部昇格します！", image: "img/dori.png" },
+      { number: 17, name: "りく", courtName: "りく", position: "AT", grade: "4年", isBench: false, department: "埼玉栄", history: "サッカー", hobby: "シアの観察", goal: "全身全霊！！！", image: "img/riku.png" },
+      { number: 7, name: "ばず", courtName: "ばず", position: "AT", grade: "4年", isBench: true, department: "伊奈学園総合高校", history: "ラクロス", hobby: "編み物", goal: "4年間の集大成！大好きなみんなと全力で楽しんで勝ちます！", image: "img/buzz.png" },
+      { number: 15, name: "ちゃむ", courtName: "ちゃむ", position: "G", grade: "3年", isBench: true, department: "埼玉県立川口北高等学校", history: "水泳", hobby: "モノマネ", goal: "とにかくセーブして一部昇格に貢献できるように頑張ります⭐️", image: "img/cham.png" },
+      { number: 99, name: "ひゅう", courtName: "ひゅう", position: "TR", grade: "3年", isBench: false, department: "私立山村学園高校", history: "ソフトボール、陸上", hobby: "ドライブ", goal: "選手が怪我なくシーズンを終えられるように全力でサポートします！", image: "img/hyu.png" },
+      { number: 33, name: "りた", courtName: "りた", position: "MF", grade: "3年", isBench: true, department: "横浜市立東高校", history: "チアリーディング、ラクロス", hobby: "ごんちゃと紫が大好きです💜🧋", goal: "26リーグ自分らしく笑顔で駆け抜けます💨そして2部ベスト10になって叙々苑連れてってもらえるように頑張ります！！✨👊🏻", image: "img/rita.png" },
+      { number: 18, name: "なさ", courtName: "なさ", position: "DF", grade: "3年", isBench: false, department: "埼玉県立和光国際高校", history: "ソフテニス", hobby: "行きたい旅行先をリストアップすること！", goal: "チームの一員としてできることを全力でします！", image: "img/nasa.png" },
+      { number: 8, name: "りず", courtName: "りず", position: "AT", grade: "3年", isBench: true, department: "都立小平高校", history: "テニス、ソフトテニス、水泳", hobby: "ジム、韓国ドラマ、推し活", goal: "チームの勝利に貢献できるように頑張ります！", image: "img/liz.png" },
+      { number: 16, name: "るく", courtName: "るく", position: "MF", grade: "3年", isBench: true, department: "横浜隼人高校", history: "野球", hobby: "和菓子と部活帰りのアイス♡", goal: "皆様の応援を力に、チームとしても個人としてもベストな結果を残します!!", image: "img/ruku.png" },
+      { number: 38, name: "さわ", courtName: "さわ", position: "DF", grade: "3年", isBench: true, department: "市立柏高等学校", history: "バスケットボール", hobby: "チョコ食べることが大好きです🍫", goal: "チームの一部昇格に貢献できるよう精一杯頑張ります！", image: "img/sawa.png" },
+      { number: 99, name: "にも", courtName: "にも", position: "MG", grade: "3年", isBench: false, department: "安田学園高等学校", history: "陸上部マネ", hobby: "夏服を探すこと！", goal: "チーム全員で勝利を掴みます！", image: "img/nimo.png" },
+      { number: 30, name: "らめ", courtName: "らめ", position: "DF", grade: "3年", isBench: true, department: "伊奈学園総合高等学校", history: "ラクロス、バスケ、体操", hobby: "海外映画鑑賞、 美味しそうなラーメン屋さんを調べる", goal: "自分らしく元気に2026の夏も駆け抜けます💖", image: "img/rame.png" },
+      { number: 28, name: "せん", courtName: "せん", position: "MF", grade: "3年", isBench: true, department: "都立江北高校", history: "ソフトボール", hobby: "ドラマを見ること", goal: "自分の力を出しきる、後悔しない", image: "img/sen.png" },
+      { number: 31, name: "てる", courtName: "てる", position: "G", grade: "3年", isBench: false, department: "本庄東高校", history: "ラクロス、ソフトテニス", hobby: "食べること", goal: "先輩の支えになれるように頑張ります！", image: "img/teru.png" },
+      { number: 4, name: "しゅん", courtName: "しゅん", position: "MF", grade: "3年", isBench: true, department: "都立高島高校", history: "陸上、硬式テニス、空手", hobby: "VIVANT・F1を見ること！", goal: "ドローから東洋の流れを作って、走って奪ってシュート決めます！！", image: "img/shun.png" },
+      { number: 24, name: "もか", courtName: "もか", position: "MF", grade: "2年", isBench: false, department: "岩倉高校", history: "バレーボール、陸上、ラクロス", hobby: "シャッフルアイランド", goal: "得意のグラボに誰よりも早く全力で駆け寄り、チームに流れをもってこられるよう頑張ります！", image: "img/moka.png"},
+      { number: 99, name: "さら", courtName: "さら", position: "TR", grade: "2年", isBench: false, department: "星野高校", history: "卓球", hobby: "Netflixを見ること", goal: "選手が安心できるベンチワークをする！", image: "img/sara.png" },
+      { number: 36, name: "その", courtName: "その", position: "DF", grade: "2年", isBench: false, department: "恵泉女学園高校", history: "硬式テニス", hobby: "パンを作っている人の動画をみること", goal: "チームの一員という自覚を持って一生懸命頑張ります！", image: "img/sono.png" },
+      { number: 99, name: "とき", courtName: "とき", position: "MG", grade: "2年", isBench: false, department: "都立飛鳥高校", history: "陸上、バスケ", hobby: "サッカー日本代表とアイドルを見ること！", goal: "選手を全力でサポートします！", image: "img/toki.png" },
+      { number: 44, name: "かい", courtName: "かい", position: "AT", grade: "2年", isBench: false, department: "都立国際高等学校", history: "チアリーディング バレーボール", hobby: "漫畫・アニメ・映画", goal: "絶対1部昇格", image: "img/kai.png" },
+      { number: 20, name: "まち", courtName: "まち", position: "MF", grade: "2年", isBench: false, department: "秦野高等学校", history: "バスケ、弓道", hobby: "韓ドラを見ること", goal: "1日1日の練習で少しでも成長できるように努力します。", image: "img/machi.png" },
+      { number: 26, name: "たえ", courtName: "たえ", position: "MF", grade: "2年", isBench: true, department: "習志野高校", history: "陸上、硬式テニス", hobby: "VIVANT見ること", goal: "26チームの一部昇格に少しでも貢献できるよう自分にできること精一杯頑張ります！", image: "img/tae.png" },
+      { number: 25, name: "らび", courtName: "らび", position: "MF", grade: "2年", isBench: false, department: "日本体育大学柏高等学校", history: "陸上、ハンドボール", hobby: "美味しくまぜそば探し", goal: "自分らしく全力で挑みます！", image: "img/lavi.png" },
+      { number: 14, name: "なこ", courtName: "なこ", position: "MF", grade: "2年", isBench: false, department: "跡見学園高校", history: "サッカー", hobby: "モモンガ", goal: "26チームの役に立てるよう精一杯頑張りますので、応援よろしくお願いします！💙📣", image: "img/nako.png" },
+      { number: 22, name: "よる", courtName: "よる", position: "AT", grade: "2年", isBench: false, department: "豊南高等学校", history: "なし", hobby: "なし", goal: "頑張ります", image: "img/yoru.png" },
+      { number: 43, name: "てぃあ", courtName: "てぃあ", position: "MF", grade: "2年", isBench: true, department: "東京成徳大学高等学校", history: "バスケットボール、ラクロス", hobby: "一人旅", goal: "自分の役割を全うしチームの勝利に貢献します！", image: "img/tia.png" },
+      { number: 23, name: "まれ", courtName: "まれ", position: "G", grade: "2年", isBench: true, department: "埼玉県立大宮中央高等学校", history: "バドミントン", hobby: "食事と睡眠", goal: "戦力になれるように頑張ります！", image: "img/mare.png" },
+      { number: 35, name: "いよ", courtName: "いよ", position: "MF", grade: "2年", isBench: false, department: "白梅学園高等学校", history: "バレーボール", hobby: "音楽を聴くこと", goal: "苦手を克服してチームに貢献できるように頑張ります！", image: "img/iyo.png" },
+      { number: 47, name: "なな", courtName: "なな", position: "MF", grade: "2年", isBench: false, department: "大垣北高校", history: "陸上、ハンドボール", hobby: "アイドル好き！", goal: "チームの勝利のために、自分にできることを全力で頑張ります！", image: "img/nana.png" },
+      { number: 59, name: "こと", courtName: "こと", position: "MF", grade: "1年", isBench: false, department: "N高等学校", history: "バレーボール", hobby: "バレーボール、アニメ", goal: "先輩方のプレーから沢山学びながら、応援とサポートでチームを盛り上げられるよう頑張ります！", image: "img/koto.png" },
+      { number: 52, name: "める", courtName: "める", position: "MF", grade: "1年", isBench: false, department: "大宮北高校", history: "ソフトテニス、バドミントン", hobby: "VIVANTを見ること、M!LK", goal: "練習でどんどん上手くなってサマーで点を決める", image: "img/meru.png" },
+      { number: 99, name: "ふう", courtName: "ふう", position: "AS", grade: "1年", isBench: false, department: "日本体育大学柏高等学校", history: "バドミントン バレーボール", hobby: "音楽を聞くこと", goal: "自分から積極的な動く26チームで勝ちに行く!!", image: "img/fuu.png" },
+      { number: 41, name: "りあ", courtName: "りあ", position: "MF", grade: "1年", isBench: false, department: "女子聖学院高等学校", history: "バレエ、ダンス", hobby: "音楽を聴くこと", goal: "リーグでは、全力で応援します！今シーズンは、サマーで全勝できるように頑張ります！", image: "img/ria.png" },
+      { number: 40, name: "はる", courtName: "はる", position: "MF", grade: "1年", isBench: false, department: "女子聖学院高等学校", history: "バスケ", hobby: "Netflixを観ること", goal: "リーグ戦では先輩方のかっこいい姿を全力で応援します！また、今シーズンは1年生らしく色々な事に挑戦します！！", image: "img/haru.png" },
+      { number: 32, name: "しぇり", courtName: "しぇり", position: "G", grade: "1年", isBench: false, department: "秋田県立本荘こうとうがっこ", history: "ダンス陸上", hobby: "ご飯食べにいく。", goal: "来年リーグベンチ入れるように今できること精一杯頑張る。", image: "img/sheri.png" },
+      { number: 56, name: "せら", courtName: "せら", position: "MF", grade: "1年", isBench: false, department: "湘南工科大学附属高等学校", history: "卓球", hobby: "ゲーム", goal: "しっかりと声を出して雰囲気づくり、応援をします。", image: "img/sera.png" },
+      { number: 51, name: "もあ", courtName: "もあ", position: "MF", grade: "1年", isBench: false, department: "横浜市立東高校", history: "ラクロス、水泳", hobby: "アイスを食べること", goal: "たくさん学んで、たくさん挑戦して、ラクロスを思いっきり楽しみます！", image: "img/moa.png" },
+      { number: 32, name: "るる", courtName: "るる", position: "MF", grade: "1年", isBench: false, department: "東洋大学京北高等学校", history: "器械体操、硬式テニス", hobby: "スムージーを飲むこと", goal: "全力で応援する！", image: "img/lulu.png" },
+      { number: 55, name: "もも", courtName: "もも", position: "MF", grade: "1年", isBench: false, department: "富士見中学校高等学校", history: "新体操、ダンス、水泳", hobby: "筋トレ、読書、縫い物", goal: "自分に出来ることを精一杯やりたいです！", image: "img/momo.png" }
     ];
 
     let currentFilteredPlayers = [];
@@ -470,8 +418,8 @@
       if (val === 'bench') {
         filtered = players.filter(p => p.isBench);
       } else if (val.startsWith('grade-')) {
-        const g = parseInt(val.replace('grade-', ''));
-        filtered = players.filter(p => p.grade === g);
+        const g = val.replace('grade-', '');
+        filtered = players.filter(p => p.grade.startsWith(g));
       } else if (val.startsWith('pos-')) {
         const pos = val.replace('pos-', '');
         filtered = players.filter(p => p.position === pos);
@@ -495,7 +443,7 @@
 
       document.getElementById('modalImg').src = player.image;
       document.getElementById('infoCourtName').textContent = player.courtName;
-      document.getElementById('infoGrade').textContent = `${player.grade}年`;
+      document.getElementById('infoGrade').textContent = player.grade;
       document.getElementById('infoDepartment').textContent = player.department;
       document.getElementById('infoHistory').textContent = player.history;
       document.getElementById('infoHobby').textContent = player.hobby;
